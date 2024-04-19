@@ -1,0 +1,13 @@
+:root{
+    --animate-delay: 1.8s;
+}
+.reveal{
+    position: relative;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: 2s all ease;
+  }
+.reveal.active{
+    transform: translateY(0);
+    opacity: 1;
+}
