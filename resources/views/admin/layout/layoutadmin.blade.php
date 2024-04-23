@@ -57,9 +57,9 @@
         </div>
       </li>
     </ul>
-    @if (Session::has('success_message'))
-    <div class="alert alert-success alert-dismissible fade show mx-auto ml-5" role="alert">
-        <strong>Success: </strong> {{ Session::get('success_message') }}
+    @if (Session::has('status'))
+    <div class="alert alert-success alert-dismissible fade show mx-auto ml-5" style="position: absolute; left: 33%; top: 13%;" role="alert">
+        <strong>Success: </strong> {{ Session::get('status') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -97,7 +97,11 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-            <img src="{{asset('admin/dist/img/avatar.jpg')}}" class="img-circle elevation-2" alt="User Image">
+            @if (Auth::guard('admin')->user()->foto)
+                <img src="{{ asset('admin/foto/' . Auth::guard('admin')->user()->foto) }}" class="img-circle elevation-2 h-75" alt="User Image">
+            @else
+                <img src="{{ asset('admin/dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
+            @endif
         </div>
         <div class="info">
           <a href="/admin/dashboard" class="d-block">{{ Auth::guard('admin')->user()->nama }}</a>
@@ -263,6 +267,37 @@
             <a href="/admin/testimonial/create" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Tambah Testimonial</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="/admin/profile" class="nav-link">
+          <i class="nav-icon fas fa-user"></i>
+          <p>
+            Profile
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fa fa-cog"></i>
+          <p>
+            Pengaturan
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="/admin/testimonial" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Ganti Password</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('admin/update-admin-details') }}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Update Data Diri</p>
             </a>
           </li>
         </ul>

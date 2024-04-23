@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Produk;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProdukController extends Controller
 {
@@ -63,7 +64,7 @@ class ProdukController extends Controller
         $newProduk->deskripsi = $request->deskripsi;
 
         $newProduk->save();
-        return redirect("admin/produk")->with ('status', 'produk berhasil di tambahkan');
+        return redirect("admin/produk")->with ('status', 'Produk berhasil di tambahkan');
     }
 
     /**
@@ -114,7 +115,7 @@ class ProdukController extends Controller
         'deskripsi' => $request->deskripsi,
         ]);
 
-        return redirect('/admin/produk');
+        return redirect('/admin/produk')->with('status', 'Produk Berhasil di ubah');
     }
 
     /**

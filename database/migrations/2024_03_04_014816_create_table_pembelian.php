@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('produk_id');
             $table->foreign('produk_id')->references('id')->on('produk');
             $table->integer('jumlah');
+            $table->integer('harga');
             $table->timestamps();
         });
     }

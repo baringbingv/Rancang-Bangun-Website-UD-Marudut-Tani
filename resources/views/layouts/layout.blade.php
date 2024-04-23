@@ -69,7 +69,7 @@
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="{{ url('/') }}" class="nav-item nav-link">Home</a>
-                            <a href="{{ url('shop') }}" class="nav-item nav-link">Shop</a>
+                            <a href="{{ url('shop') }}" class="nav-item nav-link">Produk</a>
                             <a href="{{ url('about') }}" class="nav-item nav-link">About</a>
                             <a href="{{ url('contact') }}" class="nav-item nav-link">Contact</a>
                         </div>

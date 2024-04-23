@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Penjualan;
 use App\Models\Produk;
+use App\Http\Controllers\Controller;
 
 class PenjualanController extends Controller
 {
@@ -37,11 +38,13 @@ class PenjualanController extends Controller
     public function store(Request $request)
     {
         $validate = [
+            'nama_pembeli' => 'required',
             'produk_id.*' => 'required',
             'jumlah.*' => 'required|numeric',
         ];
 
         $message = [
+            'nama_pembeli.required' => 'Nama Pelanggan Harus Di isi',
             'produk_id.*.required' => 'Produk Harus Di isi',
             'jumlah.*.required' => 'Jumlah Harus Di isi',
             'jumlah.*.numeric' => 'Jumlah Harus Bertipe Angka',
@@ -52,6 +55,7 @@ class PenjualanController extends Controller
 
         for ($i = 0; $i < $numPenjualan; $i++) {
             $newPenjualan = new Penjualan;
+            $newPenjualan->nama_pembeli = $request->nama_pembeli;
             $newPenjualan->produk_id = $request->produk_id[$i];
             $newPenjualan->jumlah = $request->jumlah[$i];
             $newPenjualan->save();

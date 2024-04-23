@@ -1,10 +1,10 @@
 @extends('layouts.layout')
-@section('title', 'Shop')
+@section('title', 'Produk')
 @section('navhead')
 @section('content')
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">SHOP</h1>
+    <h1 class="text-center text-white display-6">PRODUK </h1>
 </div>
 <!-- Single Page Header End -->
 

@@ -5,18 +5,32 @@
 @push('script')
     <script>
         $(document).ready(function() {
+            var originalIndexes = [];
+            $('#pembelian_table tbody tr').each(function(index) {
+                originalIndexes.push(index);
+            });
+
             $('#search-date').change(function() {
                 var selectedDate = $(this).val();
-                $('#pembelian_table tbody tr').each(function() {
-                    var rowDate = $(this).find('td:eq(1)').text();
-                    if (rowDate.trim() === selectedDate) {
+                var currentIndex = 0;
+                $('#pembelian_table tbody tr').each(function(index) {
+                    if (selectedDate === '') {
                         $(this).show();
+                        $(this).find('td:eq(0)').text(originalIndexes[index] + 1);
                     } else {
-                        $(this).hide();
+                        var rowDate = $(this).find('td:eq(1)').text();
+                        if (rowDate.trim() === selectedDate) {
+                            $(this).show();
+                            $(this).find('td:eq(0)').text(currentIndex + 1);
+                            currentIndex++;
+                        } else {
+                            $(this).hide();
+                        }
                     }
                 });
-            });
+            })
         });
+
 
         $(document).on('click', '.delete', function(e) {
             e.preventDefault();
@@ -67,7 +81,16 @@
         <div class="card-header">
             <h1 class="card-title" style="font-size: 30px">Data Pembelian</h1>
         </div>
-        <input type="date" id="search-date" class="form-control mt-3 mb-3 ml-5 col-lg-2" placeholder="Cari berdasarkan tanggal pembelian...">
+        <div class="container mt-3 mb-3 ml-5">
+            <div class="row ml-5">
+                <div class="col-lg-1 mt-2">
+                    <span class="fas fa-filter text-secondary" style="font-size: 20px">Filter:</span>
+                </div>
+                <div class="col-lg-2">
+                    <input type="date" id="search-date" class="form-control" placeholder="Cari berdasarkan tanggal pembelian...">
+                </div>
+            </div>
+        </div>
         <div class="card-body">
             <table class="table table-bordered" id="pembelian_table">
                 <thead>

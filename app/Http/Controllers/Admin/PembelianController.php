@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Pembelian;
 use App\Models\Produk;
 use App\Events\PembelianCreated;
+use App\Http\Controllers\Controller;
 
 class PembelianController extends Controller
 {

@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_pmbeli');
+            $table->string('nama_pembeli');
             $table->unsignedBigInteger('produk_id');
             $table->foreign('produk_id')->references('id')->on('produk');
             $table->integer('jumlah');
-            $table->integer('harga');
             $table->timestamps();
         });
     }
