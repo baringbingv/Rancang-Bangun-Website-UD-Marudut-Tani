@@ -289,7 +289,7 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="/admin/testimonial" class="nav-link">
+            <a href="{{ url('admin/update-admin-password') }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Ganti Password</p>
             </a>

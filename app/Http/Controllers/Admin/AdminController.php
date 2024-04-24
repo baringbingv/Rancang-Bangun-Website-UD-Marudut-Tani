@@ -128,7 +128,6 @@ class AdminController extends Controller
                     $imageName = rand() . '.' . $extension;
                     $imagePath = 'admin/foto/' . $imageName;
 
-                    // Save image to folder
                     $image->move('admin/foto', $imageName);
                 }
             } else if (!empty($data['current_admin_image'])) {
@@ -142,5 +141,40 @@ class AdminController extends Controller
         }
         $admin = Auth::guard('admin')->user();
         return view('admin.settings.update_admin_details');
+    }
+
+    public function UpdateAdminPassword(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $data = $request->all();
+
+            $rules = [
+                'current_password' => 'required',
+                'new_password' => 'required|min:8',
+                'confirm_password' => 'required',
+            ];
+            $message = [
+                'current_password.required' => 'Current Password Harus Di Isi',
+                'new_password.required' => 'Password Baru Harus Di Isi',
+                'new_password.min' => 'Password Baru minimal 8 karakter',
+                'confirm_password.required' => 'Confirm Password Harus Di Isi',
+            ];
+            $this->validate($request, $rules, $message);
+
+            if (Hash::check($data['current_password'], Auth::guard('admin')->user()->password)) {
+                if ($data['confirm_password'] == $data['new_password']) {
+                    Admin::where('id', Auth::guard('admin')->user()->id)->update(['password' => bcrypt($data['new_password'])]);
+                    return redirect("admin/profile")->with('success_message', 'Password Kamu berhasil di Update');
+                } else {
+                    return redirect()->back()->with('error_message', 'New Password dan Confirm Password Kamu tidak sesuai');
+                }
+            } else {
+                return redirect()->back()->with('error_message', 'Current Password Kamu Salah');
+            }
+        }
+        $adminDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first()->toArray();
+        $admin = Auth::guard('admin')->user();
+
+        return view('admin.settings.update_admin_password')->with(compact('adminDetails'));
     }
 }

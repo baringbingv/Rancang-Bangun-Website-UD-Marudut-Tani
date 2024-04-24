@@ -16,8 +16,6 @@ use App\Controllers\Home;
 |
 */
 
-
-
 Route::get('/', 'App\Http\Controllers\Home@index');
 Route::get('/shop', 'App\Http\Controllers\Home@shop');
 Route::get('/about', 'App\Http\Controllers\Home@about');

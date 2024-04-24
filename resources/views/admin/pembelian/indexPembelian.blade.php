@@ -114,12 +114,12 @@
                                 ) }}
                             </td>
                             <td>
-                                <form action="/admin/pembelian/{{ $item->first()->id }}" method="POST">
+                                <form action="/admin/pembelian/{{ $item->id }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <a href="/admin/pembelian/{{ $item->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                                     <a href="/admin/pembelian/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
-                                    <button class="btn btn-danger btn-sm delete" name="{{ $item->first()->nama }}" id="{{ $item->id }}"><i class="fas fa-trash"></i></button>
+                                    <button class="btn btn-danger btn-sm delete" name="{{ $item->nama }}" id="{{ $item->id }}"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>
