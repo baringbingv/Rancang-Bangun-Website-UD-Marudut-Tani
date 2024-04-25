@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('tempatLahir')->nullable();
             $table->date('tanggalLahir')->nullable();
-            $table->enum('jenisKelamin', array('Laki-Laki', 'Perempuan'))->nullable();
-            $table->enum('agama', array('Islam', 'Protestan', 'Katolik', 'Hindu', 'Buddha', 'Kong Hu Cu', 'Lainmya'))->nullable();
+            $table->string('jenisKelamin')->nullable();
+            $table->string('agama')->nullable();
             $table->string('alamat')->nullable();
             $table->string('email')->nullable();
             $table->integer('noTelp')->nullable();

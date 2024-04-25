@@ -43,10 +43,10 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 });
 
 Route::prefix('/kasir')->namespace('App\Http\Controllers\Kasir')->group(function(){
-    Route::match(['get','post'], 'login', 'KasirController@Login');
+    Route::match(['get','post'], 'login', 'KasirLoginController@Login');
     Route::middleware(['kasir'])->group(function(){
-        Route::get('/dashboard', 'KasirController@dashboard');
-        Route::get('/logout', 'KasirController@logout');
+        Route::get('/dashboard', 'KasirLoginController@dashboard');
+        Route::get('/logout', 'KasirLoginController@logout');
         Route::resource('produk', 'ProdukController');
         Route::resource('kategori', 'KategoriController');
         Route::resource('kasir', 'KasirController');

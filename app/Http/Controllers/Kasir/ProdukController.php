@@ -1,22 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Kasir;
 
-use Illuminate\Http\Request;
-use App\Models\Kasir;
 use App\Models\Produk;
 use App\Models\Kategori;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class KasirController extends Controller
+class ProdukController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $kasir = Kasir::paginate(5);
+        $produk = Produk::paginate(5);
 
-        return view('admin.kasir.indexKasir', compact('kasir'));
+        return view('kasir.produk.indexProduk', compact('produk'));
     }
 
     /**
@@ -26,7 +28,8 @@ class KasirController extends Controller
      */
     public function create()
     {
-        return view('admin.kasir.tambahKasir');
+        $kategori = Kategori::all();
+        return view('admin.produk.tambahProduk', compact('kategori'));
     }
 
     /**
@@ -39,17 +42,29 @@ class KasirController extends Controller
     {
         $request->validate([
             'nama' => 'required|max:255',
-            'username' => 'required|min:6',
-            'password' => 'required|min:8',
+            'stok' => 'required|numeric',
+            'harga' => 'required|numeric',
+            'kategori' => 'required',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:5000',
+            'deskripsi' => 'required|min:30|max:50',
         ]);
 
-        $newKasir = new Kasir;
-        $newKasir->nama = $request->nama;
-        $newKasir->username = $request->username;
-        $newKasir->password = Hash::make($request->password);
+        $file = $request -> file('gambar');
+        $namaFile = $file->getClientOriginalName();
+        $tujuanFile = 'produk';
 
-        $newKasir->save();
-        return redirect("admin/kasir")->with ('status', 'Kasir berhasil di tambahkan');
+        $file->move($tujuanFile,$namaFile);
+
+        $newProduk = new Produk;
+        $newProduk->nama = $request->nama;
+        $newProduk->stok = $request->stok;
+        $newProduk->harga = $request->harga;
+        $newProduk->kategori = $request->kategori;
+        $newProduk->gambar = $namaFile;
+        $newProduk->deskripsi = $request->deskripsi;
+
+        $newProduk->save();
+        return redirect("admin/produk")->with ('status', 'Produk berhasil di tambahkan');
     }
 
     /**
@@ -60,8 +75,8 @@ class KasirController extends Controller
      */
     public function show($id)
     {
-        $kasir = Kasir::find($id);
-        return view('admin.kasir.viewKasir', compact('kasir'));
+        $produk = Produk::find($id);
+        return view('admin.produk.viewProduk', compact('produk'));
     }
 
     /**
@@ -72,8 +87,8 @@ class KasirController extends Controller
      */
     public function edit(string $id)
     {
-        $kasir = Kasir::find($id);
-        return view('admin.kasir.editKasir', ['kasir' => $kasir]);
+        $produk = Produk::find($id);
+        return view('admin.produk.editProduk', ['produk' => $produk]);
     }
 
     /**
@@ -92,7 +107,7 @@ class KasirController extends Controller
             'deskripsi' => 'required|min:30|max:50',
         ]);
 
-        Kasir::where('id', $id)->update
+        Produk::where('id', $id)->update
         ([
         'nama' => $request->nama,
         'stok' => $request->stok,
@@ -100,7 +115,7 @@ class KasirController extends Controller
         'deskripsi' => $request->deskripsi,
         ]);
 
-        return redirect('/admin/kasir');
+        return redirect('/admin/produk')->with('status', 'Produk Berhasil di ubah');
     }
 
     /**
@@ -111,8 +126,8 @@ class KasirController extends Controller
      */
     public function destroy(string $id)
     {
-        $kasir = Kasir::find($id);
-        $kasir->delete();
-        return redirect('/admin/kasir');
+        $produk = Produk::find($id);
+        $produk->delete();
+        return redirect('/admin/produk');
     }
 }

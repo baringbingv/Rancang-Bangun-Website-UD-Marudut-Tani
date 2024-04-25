@@ -98,7 +98,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
             @if (Auth::guard('admin')->user()->foto)
-                <img src="{{ asset('admin/foto/' . Auth::guard('admin')->user()->foto) }}" class="img-circle elevation-2 h-75" alt="User Image">
+                <img src="{{ asset('admin/foto/' . Auth::guard('admin')->user()->foto) }}" class="img-circle elevation-2"x alt="User Image">
             @else
                 <img src="{{ asset('admin/dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
             @endif
