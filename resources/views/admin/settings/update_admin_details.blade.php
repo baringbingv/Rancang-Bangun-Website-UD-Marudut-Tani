@@ -76,7 +76,7 @@
                 </div>
                 <div class="form-group">
                     <label for="foto">Foto</label>
-                    <input type="file" class="form-control" id="foto" name="foto" value="{{ old('foto') }}"> <br>
+                    <input type="file" class="form-control" id="foto" name="foto" value="{{ old('foto') }}" style="width: 66%;"> <br>
                     @if (!empty(Auth::guard('admin')->user()->foto))
                         <a class="btn btn-info bg-primary btn-sm" target="_blank"
                             href="{{ URL::asset('admin/foto/' . Auth::guard('admin')->user()->foto) }}">View

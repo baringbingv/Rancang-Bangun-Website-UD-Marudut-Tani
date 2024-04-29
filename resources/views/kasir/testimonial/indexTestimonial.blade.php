@@ -74,6 +74,7 @@
                     <tr class="text-center">
                         <th style="width: 10px">No</th>
                         <th>Nama</th>
+                        <th>Tanggal</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -82,13 +83,12 @@
                     <tr class="text-center">
                         <td>{{ $loop->iteration + ($testimonial->currentPage() - 1) * $testimonial->perPage() }}</td>
                         <td>{{ $value->nama }}</td>
+                        <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
                         <td>
                             <form action="/kasir/testimonial/{{ $value->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <a href="/kasir/testimonial/{{ $value->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                                <a href="/kasir/testimonial/{{ $value->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
-                                <button class="btn btn-danger btn-sm delete" name="{{ $value->nama }}" id="{{ $value->id }}"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

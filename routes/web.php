@@ -55,7 +55,7 @@ Route::prefix('/kasir')->namespace('App\Http\Controllers\Kasir')->group(function
     });
     Route::group(['middleware' => ['kasir']], function () {
         Route::get('profile', 'KasirLoginController@profile');
-        Route::match (['get', 'post'], 'update-admin-password', 'KasirLoginController@UpdateKasirPassword');
-        Route::match (['get', 'post'], 'update-admin-details', 'KasirLoginController@UpdateKasirDetails');
+        Route::match (['get', 'post'], 'update-kasir-password', 'KasirLoginController@UpdateKasirPassword');
+        Route::match (['get', 'post'], 'update-kasir-details', 'KasirLoginController@UpdateKasirDetails');
     });
 });

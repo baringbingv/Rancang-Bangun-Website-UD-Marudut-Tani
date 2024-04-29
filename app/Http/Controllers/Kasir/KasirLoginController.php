@@ -54,7 +54,7 @@ class KasirLoginController extends Controller
         return view('kasir.profile.profile');
     }
 
-    public function UpdateAdminDetails(Request $request)
+    public function UpdateKasirDetails(Request $request)
     {
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -108,7 +108,7 @@ class KasirLoginController extends Controller
         return view('kasir.settings.update_kasir_details');
     }
 
-    public function UpdateAdminPassword(Request $request)
+    public function UpdateKasirPassword(Request $request)
     {
         if ($request->isMethod('post')) {
             $data = $request->all();
