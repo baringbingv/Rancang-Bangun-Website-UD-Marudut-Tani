@@ -1,5 +1,7 @@
-@extends('admin.layout.layoutadmin')
+@extends('kasir.layout.layoutkasir')
+
 @section('title', 'Update Testimonial')
+
 @section('content')
 <div class="container-100 content-wrapper">
     <div class="card-header">
@@ -9,7 +11,7 @@
         <div class="card-header">
           <h1 class="card-title" style="font-size: 30px">Data Testimonial</h1>
         </div>
-        <form action="/admin/testimonial/{{$testimonial->id}}" method="POST">
+        <form action="/kasir/testimonial/{{$testimonial->id}}" method="POST">
             @csrf
             @method('PUT')
             <div class="card-body">
@@ -35,7 +37,7 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <button type="submit" class="btn btn-success mt-5 mr-4"><i class="fas fa-check"></i> Ubah</button>
-                <a href="/admin/testimonial" class="btn btn-danger mt-5"><i class="fas fa-times"></i> Batalkan</a>
+                <a href="/kasir/testimonial" class="btn btn-danger mt-5"><i class="fas fa-times"></i> Batalkan</a>
             </div>
         </form>
         </div>

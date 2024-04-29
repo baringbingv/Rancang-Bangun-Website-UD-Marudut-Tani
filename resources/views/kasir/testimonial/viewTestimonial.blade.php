@@ -1,4 +1,4 @@
-@extends('admin.layout.layoutadmin')
+@extends('kasir.layout.layoutkasir')
 
 @section('title', 'Data Pelanggan ' .$testimonial->nama)
 

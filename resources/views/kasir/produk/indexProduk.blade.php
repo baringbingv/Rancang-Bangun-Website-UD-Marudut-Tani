@@ -1,6 +1,6 @@
-@extends('admin.layout.layoutadmin')
+@extends('kasir.layout.layoutkasir')
 
-@section('title', 'Data Testimonial')
+@section('title', 'Data Produk')
 
 @push('script')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -35,7 +35,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "/admin/testimonial/" + id,
+                        url: "/admin/produk/" + id,
                         type: "POST"    ,
                         data: {
                             _method: 'DELETE',
@@ -66,7 +66,7 @@
     </div>
     <div class="card card-primary ml-3 mt-2" style="width: 90%">
         <div class="card-header">
-            <h1 class="card-title" style="font-size: 30px">Data Testimonial</h1>
+            <h3 class="card-title" style="font-size: 30px">Data Produk</h3>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
@@ -74,20 +74,24 @@
                     <tr class="text-center">
                         <th style="width: 10px">No</th>
                         <th>Nama</th>
+                        <th>Stok</th>
+                        <th>Kategori</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($testimonial as $key => $value)
+                    @forelse ($produk as $key => $value)
                     <tr class="text-center">
-                        <td>{{ $loop->iteration + ($testimonial->currentPage() - 1) * $testimonial->perPage() }}</td>
+                        <td>{{ $loop->iteration + ($produk->currentPage() - 1) * $produk->perPage() }}</td>
                         <td>{{ $value->nama }}</td>
+                        <td>{{ $value->stok }}</td>
+                        <td>{{ $value->kategori }}</td>
                         <td>
-                            <form action="/admin/testimonial/{{ $value->id }}" method="POST">
+                            <form action="/admin/produk/{{ $value->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a href="/admin/testimonial/{{ $value->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                                <a href="/admin/testimonial/{{ $value->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
+                                <a href="/admin/produk/{{ $value->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                                <a href="/admin/produk/{{ $value->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
                                 <button class="btn btn-danger btn-sm delete" name="{{ $value->nama }}" id="{{ $value->id }}"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
@@ -101,7 +105,7 @@
             </table>
             <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
-                    {{ $testimonial->links('vendor.pagination.bootstrap-4') }}
+                    {{ $produk->links('vendor.pagination.bootstrap-4') }}
                 </ul>
               </div>
         </div>

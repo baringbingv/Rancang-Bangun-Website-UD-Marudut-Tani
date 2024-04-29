@@ -1,4 +1,4 @@
-@extends('admin.layout.layoutadmin')
+@extends('kasir.layout.layoutkasir')
 
 @section('title', 'Data Penjualan')
 
@@ -49,7 +49,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "/admin/penjualan/" + id,
+                        url: "/kasir/penjualan/" + id,
                         type: "POST",
                         data: {
                             _method: 'DELETE',
@@ -117,11 +117,11 @@
                                 ) }}
                             </td>
                             <td>
-                                <form action="/admin/penjualan/{{ $item->id }}" method="POST">
+                                <form action="/kasir/penjualan/{{ $item->id }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="/admin/penjualan/{{ $item->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                                    <a href="/admin/penjualan/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
+                                    <a href="/kasir/penjualan/{{ $item->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                                    <a href="/kasir/penjualan/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
                                     <button class="btn btn-danger btn-sm deletea" id="{{ $item->id }}" data-name="{{ $item->nama_pembeli }}"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>

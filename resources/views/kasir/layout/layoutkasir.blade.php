@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="{{ asset('admin/plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -57,9 +58,9 @@
         </div>
       </li>
     </ul>
-    @if (Session::has('success_message'))
-    <div class="alert alert-success alert-dismissible fade show mx-auto ml-5" role="alert">
-        <strong>Success: </strong> {{ Session::get('success_message') }}
+    @if (Session::has('status'))
+    <div class="alert alert-success alert-dismissible fade show mx-auto ml-5 animate__animated animate__fadeInDown" role="alert">
+        <strong>Success: </strong> {{ Session::get('status') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -200,24 +201,40 @@
         </ul>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fa fa-star"></i>
+        <a href="/kasir/testimonial" class="nav-link">
+          <i class="nav-icon fas fa-star"></i>
           <p>
             Testimonial
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="/kasir/profile" class="nav-link">
+          <i class="nav-icon fas fa-user"></i>
+          <p>
+            Profile
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fa fa-cog"></i>
+          <p>
+            Pengaturan
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="/kasir/testimonial" class="nav-link">
+            <a href="{{ url('kasir/update-kasir-password') }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Data Testimonial</p>
+              <p>Ganti Password</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/kasir/testimonial/create" class="nav-link">
+            <a href="{{ url('kasir/update-kasir-details') }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Tambah Testimonial</p>
+              <p>Update Data Diri</p>
             </a>
           </li>
         </ul>

@@ -1,5 +1,7 @@
-@extends('admin.layout.layoutadmin')
+@extends('kasir.layout.layoutkasir')
+
 @section('title', 'Update Penjualan')
+
 @section('content')
 <div class="container-100 content-wrapper">
     <div class="card-header">
@@ -9,7 +11,7 @@
         <div class="card-header">
           <h1 class="card-title" style="font-size: 30px">Data Penjualan</h1>
         </div>
-        <form action="/admin/penjualan/{{ $penjualan->id }}" method="POST">
+        <form action="/kasir/penjualan/{{ $penjualan->id }}" method="POST">
             @csrf
             @method('PUT')
             <div class="card-body">

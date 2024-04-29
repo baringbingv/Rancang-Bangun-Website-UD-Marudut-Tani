@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Kasir;
 
 use Illuminate\Http\Request;
 use App\Models\Penjualan;
@@ -14,7 +14,7 @@ class PenjualanController extends Controller
         $penjualan = Penjualan::paginate(5);
         $produk = Produk::all();
 
-        return view('admin.penjualan.indexPenjualan', compact('penjualan', 'produk'));
+        return view('kasir.penjualan.indexPenjualan', compact('penjualan', 'produk'));
     }
 
     /**
@@ -26,7 +26,7 @@ class PenjualanController extends Controller
     {
         $produk = Produk::all();
 
-        return view('admin.penjualan.tambahPenjualan', compact('produk'));
+        return view('kasir.penjualan.tambahPenjualan', compact('produk'));
     }
 
     /**
@@ -61,7 +61,7 @@ class PenjualanController extends Controller
             $newPenjualan->save();
         }
 
-        return redirect("admin/penjualan")->with ('status', 'penjualan berhasil di tambahkan');
+        return redirect("kasir/penjualan")->with('status', 'Data Penjualan berhasil di tambah');
     }
 
     /**
@@ -73,7 +73,7 @@ class PenjualanController extends Controller
     public function show($id)
     {
         $penjualan = Penjualan::find($id);
-        return view('admin.penjualan.viewPenjualan', compact('penjualan'));
+        return view('kasir.penjualan.viewPenjualan', compact('penjualan'));
     }
 
     /**
@@ -85,7 +85,7 @@ class PenjualanController extends Controller
     public function edit(string $id)
     {
         $penjualan = Penjualan::find($id);
-        return view('admin.penjualan.editPenjualan', ['penjualan' => $penjualan]);
+        return view('kasir.penjualan.editPenjualan', ['penjualan' => $penjualan]);
     }
 
     /**
@@ -98,21 +98,15 @@ class PenjualanController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'stok' => 'required|numeric',
-            'harga' => 'required|numeric',
-            'deskripsi' => 'required|min:30|max:50',
+            'jumlah' => 'required|numeric',
         ]);
 
         Penjualan::where('id', $id)->update
         ([
-        'nama' => $request->nama,
-        'stok' => $request->stok,
-        'harga' => $request->harga,
-        'deskripsi' => $request->deskripsi,
+            'jumlah' => $request->jumlah,
         ]);
 
-        return redirect('/admin/penjualan');
+        return redirect('/kasir/penjualan')->with('status', 'Data Penjualan berhasil di update');
     }
 
     /**
@@ -125,6 +119,6 @@ class PenjualanController extends Controller
     {
         $penjualan = Penjualan::find($id);
         $penjualan->delete();
-        return redirect('/admin/penjualan');
+        return redirect('/kasir/penjualan')->with('status', 'Data Penjualan berhasil di hapus');
     }
 }

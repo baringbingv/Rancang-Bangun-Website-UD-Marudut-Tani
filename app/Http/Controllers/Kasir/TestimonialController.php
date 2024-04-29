@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Kasir;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +11,7 @@ class TestimonialController extends Controller
     public function index()
     {
         $testimonial = Testimonial::paginate(5);
-        return view('admin.testimonial.indexTestimonial', compact('testimonial'));
+        return view('kasir.testimonial.indexTestimonial', compact('testimonial'));
     }
 
     /**
@@ -21,7 +21,7 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        return view('admin.testimonial.tambahTestimonial');
+        return view('kasir.testimonial.tambahTestimonial');
     }
 
     /**
@@ -64,7 +64,7 @@ class TestimonialController extends Controller
         $newTestimonial->email = $request->email;
 
         $newTestimonial->save();
-        return redirect("/admin/testimonial")->with ('status', 'Testimonial ' .$newTestimonial->testimonial. ' berhasil di tambahkan');
+        return redirect("/kasir/testimonial")->with ('status', 'Testimonial ' .$newTestimonial->testimonial. ' berhasil di tambahkan');
     }
 
     /**
@@ -76,7 +76,7 @@ class TestimonialController extends Controller
     public function show($id)
     {
         $testimonial = Testimonial::find($id);
-        return view('admin.testimonial.viewTestimonial', compact('testimonial'));
+        return view('kasir.testimonial.viewTestimonial', compact('testimonial'));
     }
 
     /**
@@ -88,7 +88,7 @@ class TestimonialController extends Controller
     public function edit($id)
     {
         $testimonial = Testimonial::find($id);
-        return view('admin.testimonial.editTestimonial', compact('testimonial'));
+        return view('kasir.testimonial.editTestimonial', compact('testimonial'));
     }
 
     /**
@@ -121,7 +121,7 @@ class TestimonialController extends Controller
         $testimonial->email = $request['email'];
 
         $testimonial->update();
-        return redirect('/admin/testimonial')->with('success_message', 'Testimonial ' . $testimonial->nama . ' Berhasil diupdate');
+        return redirect('/kasir/testimonial')->with('status', 'Testimonial ' . $testimonial->nama . ' Berhasil diupdate');
     }
 
     /**
@@ -134,6 +134,6 @@ class TestimonialController extends Controller
     {
         $testimonial = Testimonial::find($id);
         $testimonial->delete();
-        return redirect('/admin/testimonial')->with('success_message', 'Testimonial ' . $testimonial->nama . ' berhasil dihapus');
+        return redirect('/kasir/testimonial')->with('success_message', 'Testimonial ' . $testimonial->nama . ' berhasil dihapus');
     }
 }

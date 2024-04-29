@@ -109,10 +109,10 @@ class ProdukController extends Controller
 
         Produk::where('id', $id)->update
         ([
-        'nama' => $request->nama,
-        'stok' => $request->stok,
-        'harga' => $request->harga,
-        'deskripsi' => $request->deskripsi,
+            'nama' => $request->nama,
+            'stok' => $request->stok,
+            'harga' => $request->harga,
+            'deskripsi' => $request->deskripsi,
         ]);
 
         return redirect('/admin/produk')->with('status', 'Produk Berhasil di ubah');
@@ -128,6 +128,6 @@ class ProdukController extends Controller
     {
         $produk = Produk::find($id);
         $produk->delete();
-        return redirect('/admin/produk');
+        return redirect('/admin/produk')->with('status', 'Produk Berhasil di hapus');
     }
 }

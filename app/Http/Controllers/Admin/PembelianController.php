@@ -101,7 +101,7 @@ class PembelianController extends Controller
 
         Pembelian::where('id', $id)->update
         ([
-        'jumlah' => $request->jumlah,
+            'jumlah' => $request->jumlah,
         ]);
 
         return redirect('/admin/pembelian');

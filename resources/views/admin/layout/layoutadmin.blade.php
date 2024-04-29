@@ -25,6 +25,10 @@
   <link rel="stylesheet" href="{{ asset('admin/plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}">
+  <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -58,7 +62,7 @@
       </li>
     </ul>
     @if (Session::has('status'))
-    <div class="alert alert-success alert-dismissible fade show mx-auto ml-5" style="position: absolute; left: 33%; top: 13%;" role="alert">
+    <div class="alert alert-success alert-dismissible fade show mx-auto ml-5 animate__animated animate__fadeInDown" role="alert">
         <strong>Success: </strong> {{ Session::get('status') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -158,29 +162,6 @@
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link">
-          <i class="nav-icon fa fa-users"></i>
-          <p>
-            Kasir
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="/admin/kasir" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Data Kasir</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/admin/kasir/create" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Tambah Kasir</p>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
           <i class="nav-icon fa fa-bars"></i>
           <p>
             Kategori
@@ -206,7 +187,7 @@
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-shopping-cart"></i>
           <p>
-            Pembelian
+            Pemesanan
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
@@ -214,13 +195,13 @@
           <li class="nav-item">
             <a href="/admin/pembelian" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Data Pembelian</p>
+              <p>Data Pemesanan</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="/admin/pembelian/create" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Tambah Pembelian</p>
+              <p>Tambah Pemesanan</p>
             </a>
           </li>
         </ul>
@@ -249,27 +230,20 @@
         </ul>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fa fa-star"></i>
+        <a href="/admin/kasir" class="nav-link">
+          <i class="nav-icon fas fa-users"></i>
           <p>
-            Testimonial
-            <i class="right fas fa-angle-left"></i>
+            Kasir
           </p>
         </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="/admin/testimonial" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Data Testimonial</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/admin/testimonial/create" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Tambah Testimonial</p>
-            </a>
-          </li>
-        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="/admin/testimonial" class="nav-link">
+          <i class="nav-icon fas fa-star"></i>
+          <p>
+            Testimonial
+          </p>
+        </a>
       </li>
       <li class="nav-item">
         <a href="/admin/profile" class="nav-link">

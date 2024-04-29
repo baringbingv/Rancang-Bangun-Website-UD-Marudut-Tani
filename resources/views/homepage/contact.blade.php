@@ -16,10 +16,12 @@
                         </div>
                     </div>
                     <div class="col-lg-7">
-                        <form action="send-email.php" method="post" class="">
-                            <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name">
-                            <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email">
-                            <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Your Message"></textarea>
+                        <form action="/tambahtestimonial" method="post" class="" enctype="multipart/form-data">
+                            @csrf
+                            <input type="text" class="w-100 form-control border-0 py-3 mb-4" name="nama" id="nama" placeholder="Your Name">
+                            <input type="file" class="w-100 form-control border-0 py-3 mb-4" name="foto" id="foto" placeholder="Your Photo">
+                            <input type="email" class="w-100 form-control border-0 py-3 mb-4" name="email" id="email" placeholder="Enter Your Email">
+                            <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10" name="deskripsi" id="deskripsi" placeholder="Your Message"></textarea>
                             <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit">Submit</button>
                         </form>
                     </div>

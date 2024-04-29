@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Kasir;
 
 use Illuminate\Http\Request;
 use App\Models\Pembelian;
@@ -15,7 +15,7 @@ class PembelianController extends Controller
         $pembelian = Pembelian::paginate(5);
         $produk = Produk::all();
 
-        return view('admin.pembelian.indexPembelian', compact('pembelian', 'produk'));
+        return view('kasir.pembelian.indexPembelian', compact('pembelian', 'produk'));
     }
 
     /**
@@ -27,7 +27,7 @@ class PembelianController extends Controller
     {
         $produk = Produk::all();
 
-        return view('admin.pembelian.tambahPembelian', compact('produk'));
+        return view('kasir.pembelian.tambahPembelian', compact('produk'));
     }
 
     /**
@@ -59,7 +59,7 @@ class PembelianController extends Controller
             $newPembelian->save();
         }
 
-        return redirect("admin/pembelian")->with ('status', 'pembelian berhasil di tambahkan');
+        return redirect("kasir/pembelian")->with ('status', 'pembelian berhasil di tambahkan');
     }
 
     /**
@@ -71,7 +71,7 @@ class PembelianController extends Controller
     public function show($id)
     {
         $pembelian = Pembelian::find($id);
-        return view('admin.pembelian.viewPembelian', compact('pembelian'));
+        return view('kasir.pembelian.viewPembelian', compact('pembelian'));
     }
 
     /**
@@ -83,7 +83,7 @@ class PembelianController extends Controller
     public function edit(string $id)
     {
         $pembelian = Pembelian::find($id);
-        return view('admin.pembelian.editPembelian', ['pembelian' => $pembelian]);
+        return view('kasir.pembelian.editPembelian', ['pembelian' => $pembelian]);
     }
 
     /**
@@ -104,7 +104,7 @@ class PembelianController extends Controller
         'jumlah' => $request->jumlah,
         ]);
 
-        return redirect('/admin/pembelian');
+        return redirect('/kasir/pembelian');
     }
 
     /**
@@ -117,6 +117,6 @@ class PembelianController extends Controller
     {
         $pembelian = Pembelian::find($id);
         $pembelian->delete();
-        return redirect('/admin/pembelian');
+        return redirect('/kasir/pembelian');
     }
 }

@@ -1,19 +1,19 @@
-@extends('admin.layout.layoutadmin')
+@extends('kasir.layout.layoutkasir')
 
-@section('title', 'Data Penjualan')
+@section('title', 'Data Pembelian')
 
 @push('script')
     <script>
         $(document).ready(function() {
             var originalIndexes = [];
-            $('#penjualan_table tbody tr').each(function(index) {
+            $('#pembelian_table tbody tr').each(function(index) {
                 originalIndexes.push(index);
             });
 
             $('#search-date').change(function() {
                 var selectedDate = $(this).val();
                 var currentIndex = 0;
-                $('#penjualan_table tbody tr').each(function(index) {
+                $('#pembelian_table tbody tr').each(function(index) {
                     if (selectedDate === '') {
                         $(this).show();
                         $(this).find('td:eq(0)').text(originalIndexes[index] + 1);
@@ -32,7 +32,7 @@
         });
 
 
-           $(document).on('click', '.delete', function(e) {
+        $(document).on('click', '.delete', function(e) {
             e.preventDefault();
             var id = $(this).attr('id');
             var name = $(this).data('name');
@@ -49,12 +49,11 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "/admin/penjualan/" + id,
-                        type: "POST",
+                        url: "/admin/pembelian/" + id,
+                        type: "POST"    ,
                         data: {
                             _method: 'DELETE',
-                            _token: '{{ csrf_token() }}',
-                            id: id
+                            _token: '{{ csrf_token() }}'
                         },
                         success: function() {
                             Swal.fire(
@@ -78,9 +77,9 @@
     <div class="card-header">
         <h4><i class="fa fa-calendar"></i> &nbsp;<?php echo date('l - d F Y'); ?></h4>
     </div>
-    <div class="card card-primary ml- mt-2" style="width: 90%">
+    <div class="card card-primary ml-3 mt-2" style="width: 90%">
         <div class="card-header">
-            <h1 class="card-title" style="font-size: 30px">Data Penjualan</h1>
+            <h1 class="card-title" style="font-size: 30px">Data Pembelian</h1>
         </div>
         <div class="container mt-3 mb-3 ml-5">
             <div class="row ml-5">
@@ -88,55 +87,53 @@
                     <span class="fas fa-filter text-secondary" style="font-size: 20px">Filter:</span>
                 </div>
                 <div class="col-lg-2">
-                    <input type="date" id="search-date" class="form-control" placeholder="Cari berdasarkan tanggal penjualan...">
+                    <input type="date" id="search-date" class="form-control" placeholder="Cari berdasarkan tanggal pembelian...">
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered" id="penjualan_table">
+            <table class="table table-bordered" id="pembelian_table">
                 <thead>
                     <tr class="text-center">
                         <th style="width: 10px">No</th>
-                        <th>Tanggal Penjualan</th>
-                        <th>Nama Pelanggan</th>
+                        <th>Tanggal Pembelian</th>
                         <th>Total Harga</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($penjualan as $index => $item)
+                    @foreach ($pembelian as $index => $item)
                         <tr class="text-center">
-                            <td>{{ $loop->iteration + ($penjualan->currentPage() - 1) * $penjualan->perPage() }}</td>
+                            <td>{{ $loop->iteration + ($pembelian->currentPage() - 1) * $pembelian->perPage() }}</td>
                             @csrf
                             <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
-                            <td>{{ $item->nama_pembeli }}</td>
                             <td>
                                 Rp. {{ number_format(
                                     $item->jumlah * $item->produk->harga,
-                                    0
+                                    2
                                 ) }}
                             </td>
                             <td>
-                                <form action="/admin/penjualan/{{ $item->id }}" method="POST">
+                                <form action="/admin/pembelian/{{ $item->id }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="/admin/penjualan/{{ $item->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                                    <a href="/admin/penjualan/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
-                                    <button class="btn btn-danger btn-sm deletea" id="{{ $item->id }}" data-name="{{ $item->nama_pembeli }}"><i class="fas fa-trash"></i></button>
+                                    <a href="/admin/pembelian/{{ $item->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                                    <a href="/admin/pembelian/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
+                                    <button class="btn btn-danger btn-sm deletead" data-name="{{ $item->jumlah }}" id="{{ $item->id }}"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>
                     @endforeach
-                    @if ($penjualan->isEmpty())
+                    @if ($pembelian->isEmpty())
                         <tr>
-                            <td colspan="5">Not Found Data</td>
+                            <td colspan="4">Not Found Data</td>
                         </tr>
                     @endif
                 </tbody>
             </table>
             <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
-                    {{ $penjualan->links('vendor.pagination.bootstrap-4') }}
+                    {{ $pembelian->links('vendor.pagination.bootstrap-4') }}
                 </ul>
             </div>
         </div>

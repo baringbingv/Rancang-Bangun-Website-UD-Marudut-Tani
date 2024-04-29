@@ -1,4 +1,4 @@
-@extends('admin.layout.layoutadmin')
+@extends('kasir.layout.layoutkasir')
 
 @section('title', 'Data Testimonial')
 
@@ -35,7 +35,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "/admin/testimonial/" + id,
+                        url: "/kasir/testimonial/" + id,
                         type: "POST"    ,
                         data: {
                             _method: 'DELETE',
@@ -83,11 +83,11 @@
                         <td>{{ $loop->iteration + ($testimonial->currentPage() - 1) * $testimonial->perPage() }}</td>
                         <td>{{ $value->nama }}</td>
                         <td>
-                            <form action="/admin/testimonial/{{ $value->id }}" method="POST">
+                            <form action="/kasir/testimonial/{{ $value->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a href="/admin/testimonial/{{ $value->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                                <a href="/admin/testimonial/{{ $value->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
+                                <a href="/kasir/testimonial/{{ $value->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                                <a href="/kasir/testimonial/{{ $value->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
                                 <button class="btn btn-danger btn-sm delete" name="{{ $value->nama }}" id="{{ $value->id }}"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>

@@ -1,5 +1,7 @@
-@extends('admin.layout.layoutadmin')
-@section('title', 'Update Penjualan')
+@extends('kasir.layout.layoutkasir')
+
+@section('title', 'Update Produk')
+
 @section('content')
 <div class="container-100 content-wrapper">
     <div class="card-header">
@@ -7,40 +9,42 @@
     </div>
     <div class="card card-primary ml-3 mt-2" style="width: 90%">
         <div class="card-header">
-          <h1 class="card-title" style="font-size: 30px">Data Penjualan</h1>
+          <h1 class="card-title" style="font-size: 30px">Data Produk</h1>
         </div>
-        <form action="/admin/penjualan/{{ $penjualan->id }}" method="POST">
+        <form action="/admin/produk/{{$produk->id}}" method="POST">
             @csrf
             @method('PUT')
             <div class="card-body">
                 <div class="form-group">
-                    <label class="nama_pembeli">Nama Pembeli</label>
-                    <input type="text" class="form-control" name="nama_penjualan" value="{{ $penjualan->nama_pembeli }}" disabled>
+                    <label class="nama">Nama</label>
+                    <input type="text" class="form-control" name="nama" value="{{ $produk->nama }}">
                 </div>
                 @error('nama')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
-                    <label class="produk_id">Nama Produk</label>
-                    <input type="text" class="form-control" name="produk_id" value="{{ $penjualan->produk->nama }}" disabled>
+                    <label class="stok">Stok</label>
+                    <input type="text" class="form-control" name="stok" value="{{ $produk->stok }}">
                 </div>
-                @error('nama')
+                @error('jenis')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
                     <label class="harga">Harga</label>
-                    <input type="number" class="form-control" value="{{ $penjualan->produk->harga }}" disabled>
+                    <input type="number" class="form-control" name="harga" value="{{ $produk->harga }}">
                 </div>
-                <div class="form-group">
-                    <label class="jumlah">Jumlah</label>
-                    <input type="number" class="form-control" name="jumlah" value="{{ $penjualan->jumlah }}">
-                </div>
-                @error('jumlah')
+                @error('stok')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-
+                <div class="form-group">
+                    <label class="deskripsi">Deskripsi</label>
+                    <input type="text" class="form-control" name="deskripsi" value="{{ $produk->deskripsi }}">
+                </div>
+                @error('stok')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <button type="submit" class="btn btn-success mt-5 mr-4"><i class="fas fa-check"></i> Ubah</button>
-                <a href="/admin/penjualan" class="btn btn-danger mt-5"><i class="fas fa-times"></i> Batalkan</a>
+                <a href="/admin/produk" class="btn btn-danger mt-5"><i class="fas fa-times"></i> Batalkan</a>
             </div>
         </form>
         </div>

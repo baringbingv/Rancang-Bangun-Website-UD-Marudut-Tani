@@ -64,7 +64,7 @@
     <div class="card-header">
         <h4><i class="fa fa-calendar"></i> &nbsp;<?php echo date('l - d F Y'); ?></h4>
     </div>
-    <div class="card card-primary ml-5 mt-2" style="width: 90%">
+    <div class="card card-primary ml-3 mt-2" style="width: 90%">
         <div class="card-header">
             <h1 class="card-title" style="font-size: 30px">Data Kasir</h1>
         </div>
@@ -85,12 +85,7 @@
                         <td>{{ $value->nama }}</td>
                         <td>{{ date('Y', strtotime($value->created_at)) }}</td>
                         <td>
-                            <form action="/admin/kasir/{{ $value->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <a href="/admin/kasir/{{ $value->id }}" class="btn btn-primary btn-sm mr-3"><i class="fas fa-eye"></i></a>
-                                <button class="btn btn-danger btn-sm delete" name="{{ $value->nama }}" id="{{ $value->id }}"><i class="fas fa-trash"></i></button>
-                            </form>
+                            <a href="/admin/kasir/{{ $value->id }}" class="btn btn-primary btn-sm mr-3"><i class="fas fa-eye"></i></a>
                         </td>
                     </tr>
                     @empty

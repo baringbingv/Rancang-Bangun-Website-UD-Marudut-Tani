@@ -16,7 +16,7 @@ class KategoriController extends Controller
     public function index()
     {
         $kategori = Kategori::paginate(5);
-        return view('admin.kategori.indexKategori', compact('kategori'));
+        return view('kasir.kategori.indexKategori', compact('kategori'));
     }
 
     /**
@@ -26,7 +26,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('admin.kategori.tambahKategori');
+        return view('kasir.kategori.tambahKategori');
     }
 
     /**
@@ -55,7 +55,7 @@ class KategoriController extends Controller
         $newKategori->deskripsi = $request->deskripsi;
 
         $newKategori->save();
-        return redirect("/admin/kategori")->with ('status', 'Kategori ' .$newKategori->kategori. ' berhasil di tambahkan');
+        return redirect("/kasir/kategori")->with ('status', 'Kategori ' .$newKategori->kategori. ' berhasil di tambahkan');
     }
 
     /**
@@ -67,7 +67,7 @@ class KategoriController extends Controller
     public function show($id)
     {
         $kategori = Kategori::find($id);
-        return view('admin.kategori.viewKategori', compact('kategori'));
+        return view('kasir.kategori.viewKategori', compact('kategori'));
     }
 
     /**
@@ -79,7 +79,7 @@ class KategoriController extends Controller
     public function edit($id)
     {
         $kategori = Kategori::find($id);
-        return view('admin.kategori.editKategori', compact('kategori'));
+        return view('kasir.kategori.editKategori', compact('kategori'));
     }
 
     /**
@@ -108,7 +108,7 @@ class KategoriController extends Controller
         $kategori->deskripsi = $request['deskripsi'];
 
         $kategori->update();
-        return redirect('/admin/kategori')->with('success_message', 'Kategori ' . $kategori->nama . ' Berhasil diupdate');
+        return redirect('/kasir/kategori')->with('success_message', 'Kategori ' . $kategori->nama . ' Berhasil diupdate');
     }
 
     /**
@@ -121,6 +121,6 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::find($id);
         $kategori->delete();
-        return redirect('/admin/kategori')->with('success_message', 'Kategori ' . $kategori->nama . ' berhasil dihapus');
+        return redirect('/kasir/kategori')->with('success_message', 'Kategori ' . $kategori->nama . ' berhasil dihapus');
     }
 }

@@ -35,7 +35,7 @@
         $(document).on('click', '.delete', function(e) {
             e.preventDefault();
             var id = $(this).attr('id');
-            var name = $(this).attr('name');
+            var name = $(this).data('name');
             Swal.fire({
                 title: 'Hapus ' + name + '?',
                 text: "Anda tidak akan dapat mengembalikan ini!",
@@ -77,7 +77,7 @@
     <div class="card-header">
         <h4><i class="fa fa-calendar"></i> &nbsp;<?php echo date('l - d F Y'); ?></h4>
     </div>
-    <div class="card card-primary ml-5 mt-2" style="width: 90%">
+    <div class="card card-primary ml-3 mt-2" style="width: 90%">
         <div class="card-header">
             <h1 class="card-title" style="font-size: 30px">Data Pembelian</h1>
         </div>
@@ -119,7 +119,7 @@
                                     @method('DELETE')
                                     <a href="/admin/pembelian/{{ $item->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                                     <a href="/admin/pembelian/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
-                                    <button class="btn btn-danger btn-sm delete" name="{{ $item->nama }}" id="{{ $item->id }}"><i class="fas fa-trash"></i></button>
+                                    <button class="btn btn-danger btn-sm deletead" data-name="{{ $item->jumlah }}" id="{{ $item->id }}"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

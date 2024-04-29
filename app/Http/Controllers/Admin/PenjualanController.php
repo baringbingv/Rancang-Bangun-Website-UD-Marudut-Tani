@@ -98,18 +98,12 @@ class PenjualanController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'stok' => 'required|numeric',
-            'harga' => 'required|numeric',
-            'deskripsi' => 'required|min:30|max:50',
+            'jumlah' => 'required|numeric',
         ]);
 
         Penjualan::where('id', $id)->update
         ([
-        'nama' => $request->nama,
-        'stok' => $request->stok,
-        'harga' => $request->harga,
-        'deskripsi' => $request->deskripsi,
+                'jumlah' => $request->jumlah,
         ]);
 
         return redirect('/admin/penjualan');
@@ -125,6 +119,6 @@ class PenjualanController extends Controller
     {
         $penjualan = Penjualan::find($id);
         $penjualan->delete();
-        return redirect('/admin/penjualan');
+        return redirect('/admin/penjualan')->with('status', 'Data Penjualan berhasil di hapus');
     }
 }

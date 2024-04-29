@@ -19,6 +19,7 @@ use App\Controllers\Home;
 Route::get('/', 'App\Http\Controllers\Home@index');
 Route::get('/shop', 'App\Http\Controllers\Home@shop');
 Route::get('/about', 'App\Http\Controllers\Home@about');
+Route::post('/tambahtestimonial', 'App\Http\Controllers\Home@store');
 Route::get('/contact', 'App\Http\Controllers\Home@contact');
 
 Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function(){
@@ -48,10 +49,13 @@ Route::prefix('/kasir')->namespace('App\Http\Controllers\Kasir')->group(function
         Route::get('/dashboard', 'KasirLoginController@dashboard');
         Route::get('/logout', 'KasirLoginController@logout');
         Route::resource('produk', 'ProdukController');
-        Route::resource('kategori', 'KategoriController');
-        Route::resource('kasir', 'KasirController');
+        Route::resource('pembelian', 'PembelianController');
+        Route::resource('penjualan', 'PenjualanController');
+        Route::resource('testimonial', 'TestimonialController');
     });
     Route::group(['middleware' => ['kasir']], function () {
-
+        Route::get('profile', 'KasirLoginController@profile');
+        Route::match (['get', 'post'], 'update-admin-password', 'KasirLoginController@UpdateKasirPassword');
+        Route::match (['get', 'post'], 'update-admin-details', 'KasirLoginController@UpdateKasirDetails');
     });
 });

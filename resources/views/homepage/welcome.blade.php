@@ -194,6 +194,7 @@
                                 </div>
                                 <div class="ms-4 d-block">
                                     <h4 class="text-dark m-0 pb-3">{{ $item->nama }}</h4>
+                                    <p class="text-dark m-0 pb-3">{{ $item->email }}</p>
                                     <p class="m-0 pb-3"></p>
                                     <div class="d-flex pe-5">
                                     </div>
