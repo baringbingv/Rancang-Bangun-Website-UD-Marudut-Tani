@@ -9,6 +9,7 @@ use App\Models\Admin;
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Models\Kasir;
+use App\Models\Penjualan;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -20,8 +21,26 @@ class AdminController extends Controller
         $JumlahProduk = Produk::count();
         $JumlahKategori = Kategori::count();
         $JumlahKasir = Kasir::count();
+        $DataPenjualan = Penjualan::all();
 
-        return view ('admin.dashboard', compact('JumlahProduk', 'JumlahKategori', 'JumlahKasir'));
+        $labels = ['January', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        $data = [];
+
+        foreach ($DataPenjualan as $Penjualan) {
+            $bulan = Carbon::parse($Penjualan->created_at)->format('F');
+            $jumlah = $Penjualan->jumlah * $Penjualan->produk->harga;
+
+            if (isset($chartData[$bulan])) {
+                $chartData[$bulan]['data'] += $jumlah;
+            } else {
+                $chartData[$bulan] = [
+                    'label' => $bulan,
+                    'data' => $jumlah,
+                ];
+            }
+        }
+
+        return view ('admin.dashboard', compact('JumlahProduk', 'JumlahKategori', 'JumlahKasir', 'bulan', 'data'));
     }
 
     public function Login(Request $request)

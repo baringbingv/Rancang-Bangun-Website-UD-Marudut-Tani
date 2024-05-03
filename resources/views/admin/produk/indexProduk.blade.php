@@ -36,7 +36,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         url: "/admin/produk/" + id,
-                        type: "POST"    ,
+                        type: "POST",
                         data: {
                             _method: 'DELETE',
                             _token: '{{ csrf_token() }}'
@@ -44,7 +44,7 @@
                         success: function() {
                             Swal.fire(
                                 'Terhapus!',
-                                'Item telah terhapus.',
+                                name + ' telah terhapus.',
                                 'success'
                             ).then(() => {
                                 location.reload();
@@ -92,7 +92,7 @@
                                 @method('DELETE')
                                 <a href="/admin/produk/{{ $value->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                                 <a href="/admin/produk/{{ $value->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
-                                <button class="btn btn-danger btn-sm delete" name="{{ $value->nama }}" id="{{ $value->id }}"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-danger btn-sm deletea" name="{{ $value->nama }}" id="{{ $value->id }}"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

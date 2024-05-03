@@ -7,9 +7,9 @@
     <div class="card-header">
         <h4><i class="fa fa-calendar"></i> &nbsp;<?php echo date('l - d F Y'); ?></h4>
     </div>
-    <div class="card card-primary">
+    <div class="card card-primary ml-3 mt-2" style="width: 90%">
         <div class="card-header">
-          <h3 class="card-title">Data Produk</h3>
+            <h1 class="card-title" style="font-size: 30px">Data Kategori</h1>
         </div>
         <form action="/admin/kategori" method="POST" enctype="multipart/form-data">
             @csrf
@@ -22,16 +22,15 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
-                    <input type="text" class="form-control" id="deskripsi" name="deskripsi" @error('deskripsi') is-invalid @enderror" value="{{ old('deskripsi') }}">
-                  </div>
-                  @error('deskripsi')
-                      <div class="alert alert-danger">{{ $message }}</div>
-                  @enderror
+                <label for="deskripsi">Deskripsi</label>
+                <input type="text" class="form-control" id="deskripsi" name="deskripsi" @error('deskripsi') is-invalid @enderror" value="{{ old('deskripsi') }}">
+            </div>
+              @error('deskripsi')
+                  <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
           </div>
           </div>
           <!-- /.card-body -->
-
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>

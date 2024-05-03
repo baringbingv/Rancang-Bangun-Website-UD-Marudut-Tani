@@ -19,9 +19,21 @@
                         <form action="/tambahtestimonial" method="post" class="" enctype="multipart/form-data">
                             @csrf
                             <input type="text" class="w-100 form-control border-0 py-3 mb-4" name="nama" id="nama" placeholder="Your Name">
+                            @error('nama')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <input type="file" class="w-100 form-control border-0 py-3 mb-4" name="foto" id="foto" placeholder="Your Photo">
+                            @error('foto')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <input type="email" class="w-100 form-control border-0 py-3 mb-4" name="email" id="email" placeholder="Enter Your Email">
+                            @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10" name="deskripsi" id="deskripsi" placeholder="Your Message"></textarea>
+                            @error('deskripsi')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit">Submit</button>
                         </form>
                     </div>

@@ -43,7 +43,7 @@ class KategoriController extends Controller
         ];
 
         $message = [
-            'kategori.required' => 'Kolom Nama Harus Di isi',
+            'kategori.required' => 'Kategori Harus Di isi',
             'kategori.max' => 'Kategori tidak boleh lebih dari 255 karakter',
             'kategori.regex' => 'Isi Kolom Nama Harus Berupa Huruf/String',
             'deskripsi.required' => 'Kolom Deskripsi Harus Di isi',

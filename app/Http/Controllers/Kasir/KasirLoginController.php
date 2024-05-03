@@ -101,7 +101,7 @@ class KasirLoginController extends Controller
                 $imageName = "";
             }
 
-            Admin::where('id', Auth::guard('kasir')->user()->id)->update(['nama' => $data['nama'], 'tempatLahir' => $data['tempatLahir'], 'tanggalLahir' => $data['tanggalLahir'], 'jenisKelamin' => $data['jenisKelamin'], 'agama' => $data['agama'], 'alamat' => $data['alamat'], 'email' => $data['email'], 'noTelp' => $data['noTelp'], 'foto' => $imageName]);
+            Kasir::where('id', Auth::guard('kasir')->user()->id)->update(['nama' => $data['nama'], 'tempatLahir' => $data['tempatLahir'], 'tanggalLahir' => $data['tanggalLahir'], 'jenisKelamin' => $data['jenisKelamin'], 'agama' => $data['agama'], 'alamat' => $data['alamat'], 'email' => $data['email'], 'noTelp' => $data['noTelp'], 'foto' => $imageName]);
             return redirect('/kasir/profile')->with('status', 'Data Diri Berhasil di Update');
         }
         $kasir = Auth::guard('kasir')->user();
@@ -128,16 +128,16 @@ class KasirLoginController extends Controller
 
             if (Hash::check($data['current_password'], Auth::guard('kasir')->user()->password)) {
                 if ($data['confirm_password'] == $data['new_password']) {
-                    Admin::where('id', Auth::guard('kasir')->user()->id)->update(['password' => bcrypt($data['new_password'])]);
+                    Kasir::where('id', Auth::guard('kasir')->user()->id)->update(['password' => bcrypt($data['new_password'])]);
                     return redirect("kasir/profile")->with('status', 'Password Kamu berhasil di Update');
                 } else {
-                    return redirect()->back()->with('error_message', 'New Password dan Confirm Password Kamu tidak sesuai');
+                    return redirect()->back()->with('message', 'New Password dan Confirm Password Kamu tidak sesuai');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'Current Password Kamu Salah');
+                return redirect()->back()->with('message', 'Current Password Kamu Salah');
             }
         }
-        $kasirDetails = Admin::where('email', Auth::guard('kasir')->user()->email)->first()->toArray();
+        $kasirDetails = Kasir::where('email', Auth::guard('kasir')->user()->email)->first()->toArray();
         $kasir = Auth::guard('kasir')->user();
 
         return view('kasir.settings.update_kasir_password')->with(compact('kasirDetails'));

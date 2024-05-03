@@ -101,7 +101,11 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-            <img src="{{asset('admin/dist/img/avatar.jpg')}}" class="img-circle elevation-2" alt="User Image">
+            @if (Auth::guard('kasir')->user()->foto)
+                <img src="{{ asset('kasir/foto/' . Auth::guard('kasir')->user()->foto) }}" class="elevation-2"x alt="User Image" style="border-radius: 50%">
+            @else
+                <img src="{{ asset('admin/dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
+            @endif
         </div>
         <div class="info">
           <a href="/kasir/dashboard" class="d-block">{{ Auth::guard('kasir')->user()->nama }}</a>

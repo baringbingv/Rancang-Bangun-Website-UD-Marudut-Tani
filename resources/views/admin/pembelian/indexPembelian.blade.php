@@ -79,7 +79,7 @@
     </div>
     <div class="card card-primary ml-3 mt-2" style="width: 90%">
         <div class="card-header">
-            <h1 class="card-title" style="font-size: 30px">Data Pembelian</h1>
+            <h1 class="card-title" style="font-size: 30px">Data Pemesanan</h1>
         </div>
         <div class="container mt-3 mb-3 ml-5">
             <div class="row ml-5">
