@@ -1,5 +1,28 @@
 @extends('layouts.layout')
 @section('title', 'Produk')
+@push('script')
+<script>
+    const searchInput = document.querySelector('#search');
+    const productItems = document.querySelectorAll('.col-lg-6');
+
+    searchInput.addEventListener('keyup', function(event) {
+        const searchTerm = event.target.value.toLowerCase();
+
+        productItems.forEach(function(item) {
+            const productName = item.querySelector('h4');
+            if (productName) {
+                const productNameText = productName.textContent.toLowerCase();
+
+                if (productNameText.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+        });
+    });
+</script>
+@endpush
 @section('navhead')
 @section('content')
 <!-- Single Page Header start -->
@@ -28,7 +51,7 @@
                             <div class="row g-4">
                                 <div class="col-lg-12">
                                     <div class="mb-3">
-                                        <h4>Kategori</h4>
+                                        <h5>Kategori</h5>
                                         <ul class="list-unstyled fruite-categorie">
                                             @foreach ($AllKategori as $item)
                                             @php
@@ -56,7 +79,7 @@
                                                     <div class="col-lg-12">
                                                         <div class="row g-12">
                                                             @foreach ($AllProduk as $item)
-                                                            <div class="col-md-6 col-lg-6 col-xl-4 mb-5" id="produk">
+                                                            <div class="col-md-6 col-lg-6 col-xl-4 mb-5 col-lg-6">
                                                                 <div class="rounded position-relative fruite-item animate__animated animate__zoomInUp">
                                                                     <div class="fruite-img">
                                                                         <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt="">
@@ -66,7 +89,7 @@
                                                                         <h4>{{ $item->nama }}</h4>
                                                                         <p>{{ $item->deskripsi }}</p>
                                                                         <div class="d-flex justify-content-between flex-lg-wrap">
-                                                                            <p class="text-dark fs-5 fw-bold mb-0">Rp. {{ number_format($item->harga, 3) }}</p>
+                                                                            <p class="text-dark fs-5 fw-bold mb-0">Rp. {{ number_format($item->harga, 0) }}</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -88,4 +111,3 @@
     </div>
     <!-- Fruits Shop End-->
     @endsection
-

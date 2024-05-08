@@ -11,7 +11,7 @@
         <div class="card-header">
           <h1 class="card-title" style="font-size: 30px">Data Produk</h1>
         </div>
-        <form action="/admin/produk/{{$produk->id}}" method="POST">
+        <form action="/kasir/produk/{{$produk->id}}" method="POST">
             @csrf
             @method('PUT')
             <div class="card-body">

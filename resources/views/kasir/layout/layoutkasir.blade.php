@@ -108,7 +108,7 @@
             @endif
         </div>
         <div class="info">
-          <a href="/kasir/dashboard" class="d-block">{{ Auth::guard('kasir')->user()->nama }}</a>
+          <a href="/kasir/dashboard" class="d-block" style="font-size: 14px">{{ Auth::guard('kasir')->user()->nama }}</a>
         </div>
       </div>
 

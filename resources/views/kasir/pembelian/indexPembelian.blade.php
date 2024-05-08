@@ -49,7 +49,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "/admin/pembelian/" + id,
+                        url: "/kasir/pembelian/" + id,
                         type: "POST"    ,
                         data: {
                             _method: 'DELETE',
@@ -114,11 +114,11 @@
                                 ) }}
                             </td>
                             <td>
-                                <form action="/admin/pembelian/{{ $item->id }}" method="POST">
+                                <form action="/kasir/pembelian/{{ $item->id }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="/admin/pembelian/{{ $item->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                                    <a href="/admin/pembelian/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
+                                    <a href="/kasir/pembelian/{{ $item->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                                    <a href="/kasir/pembelian/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
                                     <button class="btn btn-danger btn-sm deletead" data-name="{{ $item->jumlah }}" id="{{ $item->id }}"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>

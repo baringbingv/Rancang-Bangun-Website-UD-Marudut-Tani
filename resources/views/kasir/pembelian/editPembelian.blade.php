@@ -11,7 +11,7 @@
         <div class="card-header">
           <h1 class="card-title" style="font-size: 30px">Data Pembelian</h1>
         </div>
-        <form action="/admin/pembelian/{{$pembelian->id}}" method="POST">
+        <form action="/kasir/pembelian/{{$pembelian->id}}" method="POST">
             @csrf
             @method('PUT')
             <div class="card-body">

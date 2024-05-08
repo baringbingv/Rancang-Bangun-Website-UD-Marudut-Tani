@@ -29,7 +29,7 @@ class ProdukController extends Controller
     public function create()
     {
         $kategori = Kategori::all();
-        return view('admin.produk.tambahProduk', compact('kategori'));
+        return view('kasir.produk.tambahProduk', compact('kategori'));
     }
 
     /**
@@ -64,7 +64,7 @@ class ProdukController extends Controller
         $newProduk->deskripsi = $request->deskripsi;
 
         $newProduk->save();
-        return redirect("admin/produk")->with ('status', 'Produk berhasil di tambahkan');
+        return redirect("kasir/produk")->with ('status', 'Produk berhasil di tambahkan');
     }
 
     /**
@@ -76,7 +76,7 @@ class ProdukController extends Controller
     public function show($id)
     {
         $produk = Produk::find($id);
-        return view('admin.produk.viewProduk', compact('produk'));
+        return view('kasir.produk.viewProduk', compact('produk'));
     }
 
     /**
@@ -88,7 +88,7 @@ class ProdukController extends Controller
     public function edit(string $id)
     {
         $produk = Produk::find($id);
-        return view('admin.produk.editProduk', ['produk' => $produk]);
+        return view('kasir.produk.editProduk', ['produk' => $produk]);
     }
 
     /**
@@ -115,7 +115,7 @@ class ProdukController extends Controller
         'deskripsi' => $request->deskripsi,
         ]);
 
-        return redirect('/admin/produk')->with('status', 'Produk Berhasil di ubah');
+        return redirect('/kasir/produk')->with('status', 'Produk Berhasil di ubah');
     }
 
     /**
@@ -128,6 +128,6 @@ class ProdukController extends Controller
     {
         $produk = Produk::find($id);
         $produk->delete();
-        return redirect('/admin/produk');
+        return redirect('/kasir/produk');
     }
 }

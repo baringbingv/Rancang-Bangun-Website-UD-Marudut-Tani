@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <a href="/admin/testimonial" class="btn btn-info btn-sm mt-5 mr-5 mb-2">Kembali</a>
+            <a href="/kasir/testimonial" class="btn btn-info btn-sm mt-5 mr-5 mb-2">Kembali</a>
         </div>
     </div>
 </div>

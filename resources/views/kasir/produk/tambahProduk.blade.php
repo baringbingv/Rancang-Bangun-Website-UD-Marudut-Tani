@@ -11,7 +11,7 @@
         <div class="card-header">
           <h1 class="card-title" style="font-size: 30px">Tambah Produk</h1>
         </div>
-        <form action="/admin/produk" method="POST" enctype="multipart/form-data">
+        <form action="/kasir/produk" method="POST" enctype="multipart/form-data">
             @csrf
           <div class="card-body">
             <div class="form-group">

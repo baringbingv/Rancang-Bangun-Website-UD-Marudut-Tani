@@ -108,7 +108,7 @@
             @endif
         </div>
         <div class="info">
-          <a href="/admin/dashboard" class="d-block">{{ Auth::guard('admin')->user()->nama }}</a>
+          <a href="/admin/dashboard" class="d-block" style="font-size: 14px">{{ Auth::guard('admin')->user()->nama }}</a>
         </div>
       </div>
 
@@ -319,6 +319,6 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script>
 @stack('script')
-
+@stack('styles')
 </body>
 </html>

@@ -13,7 +13,7 @@ use App\Models\Penjualan;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
-
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -21,26 +21,24 @@ class AdminController extends Controller
         $JumlahProduk = Produk::count();
         $JumlahKategori = Kategori::count();
         $JumlahKasir = Kasir::count();
-        $DataPenjualan = Penjualan::all();
+        $PenjualanPerHari = Penjualan::sum('jumlah');
 
-        $labels = ['January', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-        $data = [];
+        $dataPenjualan = DB::table('penjualan')
+        ->join('produk', 'penjualan.produk_id', '=', 'produk.id')
+        ->select(DB::raw('MONTH(penjualan.created_at) as bulan'), DB::raw('SUM(penjualan.jumlah * produk.harga) as total_penjualan'))
+        ->groupBy('bulan')
+        ->get();
 
-        foreach ($DataPenjualan as $Penjualan) {
-            $bulan = Carbon::parse($Penjualan->created_at)->format('F');
-            $jumlah = $Penjualan->jumlah * $Penjualan->produk->harga;
+        $totalPenjualanPerBulan = [];
+        $labels = [];
 
-            if (isset($chartData[$bulan])) {
-                $chartData[$bulan]['data'] += $jumlah;
-            } else {
-                $chartData[$bulan] = [
-                    'label' => $bulan,
-                    'data' => $jumlah,
-                ];
-            }
+        foreach ($dataPenjualan as $penjualan) {
+            $namaBulan = date('F', mktime(0, 0, 0, $penjualan->bulan, 1));
+            $totalPenjualanPerBulan[] = $penjualan->total_penjualan;
+            $labels[] = $namaBulan;
         }
 
-        return view ('admin.dashboard', compact('JumlahProduk', 'JumlahKategori', 'JumlahKasir', 'bulan', 'data'));
+        return view ('admin.dashboard', compact('JumlahProduk', 'JumlahKategori', 'JumlahKasir', 'labels', 'totalPenjualanPerBulan', 'PenjualanPerHari'));
     }
 
     public function Login(Request $request)

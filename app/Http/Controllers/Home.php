@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class Home extends Controller
 {
     public function index(){
-        $AllProduk = Produk::all();
+        $AllProduk = Produk::take(10)->get();
         $AllKategori = Kategori::all();
         $AllTestimonial = Testimonial::all();
 
