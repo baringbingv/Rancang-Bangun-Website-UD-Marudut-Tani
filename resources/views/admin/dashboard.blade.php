@@ -10,29 +10,51 @@
     var labels = {!! json_encode($labels) !!};
     var data = {!! json_encode($totalPenjualanPerBulan) !!};
 
-    var salesChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Penjualan per Bulan',
-                backgroundColor: 'rgba(60,141,188,0.9)',
-                borderColor: 'rgba(60,141,188,0.8)',
-                pointRadius: false,
-                pointColor: '#3b8bba',
-                pointStrokeColor: 'rgba(60,141,188,1)',
-                pointHighlightFill: '#fff',
-                pointHighlightStroke: 'rgba(60,141,188,1)',
-                data: data
-            }]
-        },
+    var salesData = {
+        labels: labels,
+        datasets: [{
+            label: 'Penjualan',
+            data: data,
+            backgroundColor: 'rgba(60, 141, 188, 0.1)',
+            borderColor: 'rgba(60, 141, 188, 0.8)',
+            pointRadius: false,
+            pointColor: '#3b8bba',
+            pointStrokeColor: 'rgba(60, 141, 188, 1)',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(60, 141, 188, 1)',
+            borderWidth: 2
+        }]
+    };
+
+    var salesChartCanvas = $('#sales-chart-canvas').get(0).getContext('2d');
+    var salesChart = new Chart(salesChartCanvas, {
+        type: $('canvas').data('chart-type'),
+        data: salesData,
         options: {
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
             scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
+                x: {
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Bulan'
                     }
-                }]
+                },
+                y: {
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Penjualan'
+                    }
+                }
             }
         }
     });
@@ -143,7 +165,7 @@
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <div class="tab-pane active" id="sales-chart">
-                                    <canvas id="sales-chart-canvas" height="100"></canvas>
+                                    <canvas id="sales-chart-canvas" height="100" data-chart-type="line" data-chart-dataset-source="salesData"></canvas>
                                 </div>
                             </div>
                         </div><!-- /.card-body -->

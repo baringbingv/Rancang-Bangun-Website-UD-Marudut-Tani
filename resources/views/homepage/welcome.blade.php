@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <div class="tab-content">
-                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div id="tab-1" class="tab-pane fade show p-0">
                             <div class="row g-4">
                                 <div class="col-lg-12">
                                     <div class="row g-4 justify-content-center">
@@ -119,7 +119,7 @@
                                         <div class="col-md-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp content-center" style="aspect-ratio: 3/4">
                                             <div class="rounded position-relative fruite-item">
                                                 <div class="fruite-img">
-                                                    <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt=""  style="width: 15%; height: 50%">                                                </div>
+                                                    <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt=""  style="aspect-ratio: 3/2">                                                </div>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori }}</div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                     <h4>{{ $item->nama }}</h4>
@@ -150,7 +150,7 @@
                                        <div class="col-md-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp">
                                            <div class="rounded position-relative fruite-item">
                                                <div class="fruite-img">
-                                                   <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt="" style="width: 15%; height: 50%">
+                                                   <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt="" style="aspect-ratio: 3/2">
                                                </div>
                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori }}</div>
                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">

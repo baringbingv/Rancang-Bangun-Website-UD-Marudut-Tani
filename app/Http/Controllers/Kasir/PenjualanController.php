@@ -11,7 +11,7 @@ class PenjualanController extends Controller
 {
     public function index()
     {
-        $penjualan = Penjualan::paginate(5);
+        $penjualan = Penjualan::orderBy('created_at', 'desc')->paginate(5);
         $produk = Produk::all();
 
         return view('kasir.penjualan.indexPenjualan', compact('penjualan', 'produk'));

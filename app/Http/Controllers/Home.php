@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 class Home extends Controller
 {
     public function index(){
-        $AllProduk = Produk::take(10)->get();
+        $AllProduk = Produk::orderBy('created_at', 'desc')->take(10)->get();
         $AllKategori = Kategori::all();
         $AllTestimonial = Testimonial::all();
 
         return view ('homepage.welcome', compact('AllProduk', 'AllKategori', 'AllTestimonial'));
     }
     public function shop(){
-        $AllProduk = Produk::all();
+        $AllProduk = Produk::orderBy('created_at', 'desc')->get();
         $AllKategori = Kategori::all();
 
         return view ('homepage.shop', compact('AllProduk', 'AllKategori'));

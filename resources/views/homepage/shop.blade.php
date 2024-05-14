@@ -9,15 +9,20 @@
         const searchTerm = event.target.value.toLowerCase();
 
         productItems.forEach(function(item) {
-            const productName = item.querySelector('h4');
-            if (productName) {
-                const productNameText = productName.textContent.toLowerCase();
+            const productNames = item.querySelectorAll('h4, h6');
+            let matchFound = false;
 
+            productNames.forEach(function(productName) {
+                const productNameText = productName.textContent.toLowerCase();
                 if (productNameText.includes(searchTerm)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
+                    matchFound = true;
                 }
+            });
+
+            if (matchFound) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
             }
         });
     });
@@ -52,16 +57,19 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3">
                                         <h5>Kategori</h5>
-                                        <ul class="list-unstyled fruite-categorie">
+                                        <ul class="list-unstyled fruite-categorie nav nav-pills flex-column mb-3">
+                                            @php
+                                                $jumlahData = $AllProduk->count();
+                                            @endphp
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="tab-1-link" data-bs-toggle="pill" href="#tab-1"><i class="fas fa-leaf me-2"></i>All Products <span class="text-secondary">({{ $jumlahData }})</span></a>
+                                            </li>
                                             @foreach ($AllKategori as $item)
                                             @php
                                                 $jumlahData = $AllProduk->where('kategori', $item->kategori)->count();
                                             @endphp
-                                            <li>
-                                                <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>{{ $item->kategori }}</a>
-                                                    <span>({{ $jumlahData }})</span>
-                                                </div>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="tab-{{ $item->kategori }}-link" data-bs-toggle="pill" href="#tab-{{ $item->kategori }}"><i class="fas fa-leaf me-2"></i>{{ $item->kategori }} <span class="text-secondary">({{ $jumlahData }})</span></a></a>
                                             </li>
                                             @endforeach
                                         </ul>
@@ -82,9 +90,9 @@
                                                             <div class="col-md-6 col-lg-6 col-xl-4 mb-5 col-lg-6">
                                                                 <div class="rounded position-relative fruite-item animate__animated animate__zoomInUp">
                                                                     <div class="fruite-img">
-                                                                        <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt="">
+                                                                        <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt="" style="aspect-ratio: 3/2">
                                                                     </div>
-                                                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori }}</div>
+                                                                    <h6 class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori }}</h6>
                                                                     <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                                         <h4>{{ $item->nama }}</h4>
                                                                         <p>{{ $item->deskripsi }}</p>
@@ -99,6 +107,42 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @php
+                                                $kategoriDariDatabase = \App\Models\Kategori::pluck('kategori')->toArray();
+                                                $kategoriKonten = [];
+                                                foreach ($kategoriDariDatabase as $kategori) {
+                                                    $kategoriKonten[$kategori] = "$kategori";
+                                                }
+                                            @endphp
+                                        @foreach($kategoriKonten as $kategori => $konten)
+                                        @if($konten)
+                                            <div id="tab-{{ $kategori }}" class="tab-pane fade">
+                                                <div class="row g-12">
+                                                    <div class="col-lg-12">
+                                                        <div class="row g-12">
+                                                            @foreach($AllProduk->where('kategori', $kategori) as $item)
+                                                                <div class="col-md-6 col-lg-6 col-xl-4 mb-5 col-lg-6 fruite-item" id="{{ $item->kategori }}">
+                                                                    <div class="rounded position-relative animate__animated animate__zoomInUp">
+                                                                        <div class="fruite-img">
+                                                                            <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt="" style="aspect-ratio: 3/2">
+                                                                        </div>
+                                                                        <h6 class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori }}</h6>
+                                                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                                            <h4>{{ $item->nama }}</h4>
+                                                                            <p>{{ $item->deskripsi }}</p>
+                                                                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                                                                <p class="text-dark fs-5 fw-bold mb-0">Rp. {{ number_format($item->harga, 0) }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @endforeach
                                         </div>
                                     </div>
                                 </div>
