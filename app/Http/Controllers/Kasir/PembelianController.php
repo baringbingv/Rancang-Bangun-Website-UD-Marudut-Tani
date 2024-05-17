@@ -12,7 +12,7 @@ class PembelianController extends Controller
 {
     public function index()
     {
-        $pembelian = Pembelian::paginate(5);
+        $pembelian = Pembelian::paginate(20);
         $produk = Produk::all();
 
         return view('kasir.pembelian.indexPembelian', compact('pembelian', 'produk'));

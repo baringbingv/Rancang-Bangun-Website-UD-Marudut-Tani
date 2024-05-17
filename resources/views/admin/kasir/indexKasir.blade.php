@@ -69,7 +69,7 @@
             <h1 class="card-title" style="font-size: 30px">Data Kasir</h1>
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-sm">
                 <thead>
                     <tr class="text-center">
                         <th style="width: 10px">No</th>
@@ -85,7 +85,14 @@
                         <td>{{ $value->nama }}</td>
                         <td>{{ date('Y', strtotime($value->created_at)) }}</td>
                         <td>
-                            <a href="/admin/kasir/{{ $value->id }}" class="btn btn-primary btn-sm mr-3"><i class="fas fa-eye"></i></a>
+                            <form action="/admin/kasir/{{ $value->id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <div class="btn-group">
+                                    <a href="/admin/kasir/{{ $value->id }}" class="btn btn-primary btn-sm mr-3"><i class="fas fa-eye"></i></a>
+                                    <button class="btn btn-danger btn-sm delete" name="{{ $value->nama }}" id="{{ $value->id }}"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </form>
                         </td>
                     </tr>
                     @empty

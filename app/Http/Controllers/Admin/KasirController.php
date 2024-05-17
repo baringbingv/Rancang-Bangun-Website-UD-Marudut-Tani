@@ -14,7 +14,7 @@ class KasirController extends Controller
 {
     public function index()
     {
-        $kasir = Kasir::paginate(5);
+        $kasir = Kasir::paginate(10);
 
         return view('admin.kasir.indexKasir', compact('kasir'));
     }

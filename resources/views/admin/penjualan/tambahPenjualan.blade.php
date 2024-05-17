@@ -4,31 +4,77 @@
 
 @push('script')
 <script>
-    $(document).ready(function() {
-        $('#jumlahProduk').change(function() {
-            var numPenjualan = $(this).val();
-            var html = '';
-            for (var i = 2; i <= numPenjualan; i++) {
-                html += '<div class="form-group row">';
-                html += '<label for="produk_id" class="col-sm-1 col-form-label">Produk ' + i + '</label>';
-                html += '<div class="col-sm-4">'
-                html += '<select name="produk_id[]" id="produk_id[]" class="custom-select form-control-border" value="{{ old('produk_id[]') }}">';
-                html += '<option value="">--Pilih Produk--</option>';
-                html += '@foreach ($produk as $item)';
-                html += '<option value="{{ $item->id }}">{{ $item->nama }}</option>';
-                html += '@endforeach';
-                html += '</select>';
-                html += '</div>';
-                html += '<label for="jumlah" class="col-sm-3 col-form-label text-right">Jumlah</label>';
-                html += '<div class="col-sm-1">'
-                html += '<input type="int" class="form-control" name="jumlah[]">';
-                html += '</div>';
-                html += '</div>';
-            }
-            $('#additionalFields').html(html);
-        });
-    });
+    var totalHarga = 0;
+    var jumlah = 0;
+    var listItem = [];
 
+    function tambahItem(){
+        updateTotalHarga(parseInt($('#produk_id').find(':selected').data('harga')))
+        var item = listItem.filter((el) => el.id === $('#produk_id').find(':selected').data('id'));
+        if(item.length > 0){
+            item[0].jumlah += 1
+        }else{
+            var item = {
+                id: $('#produk_id').find(':selected').data('id'),
+                nama: $('#produk_id').find(':selected').data('nama'),
+                kategori: $('#produk_id').find(':selected').data('kategori'),
+                harga: $('#produk_id').find(':selected').data('harga'),
+                jumlah: 1,
+            }
+            listItem.push(item)
+        }
+        updateJumlah(1)
+        updateTable()
+    }
+
+    function updateTotalHarga(nom){
+        totalHarga += nom;
+        $('[name=total_harga]').val(totalHarga)
+        $('.totalHarga').html('Rp. ' + formatRupiah(totalHarga.toString()))
+    }
+
+    function updateJumlah(nom){
+        jumlah += nom;
+        $('.jumlah').html(formatRupiah(jumlah.toString()))
+    }
+
+    function updateTable(){
+    var html = '';
+    listItem.map((el,index) => {
+        var harga = formatRupiah(el.harga.toString())
+        var jumlah = formatRupiah(el.jumlah.toString())
+        html += `
+        <tr>
+            <td>${index +1}</td>
+            <td>${el.nama}</td>
+            <td>${el.kategori}</td>
+            <td>${jumlah}</td>
+            <td>Rp. ${harga}</td>
+            <td>
+                <input type="hidden" name="produk_id[]" value="${el.id}" multiple>
+                <input type="hidden" name="jumlah[]" value="${el.jumlah}" multiple>
+                <button type="button" class="btn btn-danger" onclick="deleteItem(${index})"><i class="fas fa-trash"></i></button>
+            </td>
+        </tr>
+        `
+    })
+    $('.transaksiItem').html(html)
+}
+
+    function deleteItem(index){
+        var item = listItem[index]
+        if(item.jumlah > 1){
+            listItem[index].jumlah -= 1;
+            updateTotalHarga(-(item.harga))
+            updateJumlah(-1)
+        }
+        else{
+            listItem.splice(index,1)
+            updateTotalHarga(-(item.harga * item.jumlah))
+            updateJumlah(-(item.jumlah))
+        }
+        updateTable()
+    }
 </script>
 @endpush
 
@@ -39,7 +85,7 @@
     </div>
     <div class="card card-primary ml-3 mt-2" style="width: 90%">
         <div class="card-header">
-          <h1 class="card-title" style="font-size: 30px">Data Penjualan</h1>
+          <h1 class="card-title" style="font-size: 30px">Tambah Penjualan</h1>
         </div>
         <form action="/admin/penjualan" method="POST" enctype="multipart/form-data">
           @csrf
@@ -51,65 +97,55 @@
               @error('nama_pembeli')
                   <div class="alert alert-danger">{{ $message }}</div>
               @enderror
-            <div class="form-group">
-              <label for="jumlahProduk">Jumlah Produk</label>
-              <select class="form-control" id="jumlahProduk" name="jumlahProduk">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-              </select>
-            </div>
             <div id="penjualan">
                 <div class="form-group row">
-                    <label for="produk" class="col-sm-1 col-form-label">Produk 1</label>
+                    <label for="produk" class="col-sm-2 col-form-label">Daftar Produk</label>
                     <div class="col-sm-4">
-                        <select name="produk_id[]" id="produk_id[]" class="custom-select form-control-border">
+                        <select name="produk_id[]" id="produk_id" class="custom-select form-control-border">
                             <option value="">--Pilih Produk--</option>
                             @foreach ($produk as $item)
-                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                <option value="{{ $item->id }}" data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" data-kategori="{{ $item->kategori }}" data-harga="{{ $item->harga }}">{{ $item->nama }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <label for="jumlah" class="col-sm-3 col-form-label text-right">Jumlah</label>
-                    <div class="col-sm-1">
-                        <input type="int" class="form-control" name="jumlah[]">
+                    <div class="col-md-6 col-12">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary d-block" onclick="tambahItem()">Tambah</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="additionalFields"></div>
+            <div class="row">
+                <table class="table table-hover table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Produk</th>
+                            <th>Kategori</th>
+                            <th>Jumlah</th>
+                            <th>Harga</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="transaksiItem">
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3">Jumlah</th>
+                            <th class="jumlah">0</th>
+                            <th class="totalHarga">Rp. 0</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+          </div>
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="hidden" name="total_harga" value="0">
+            <button type="submit" class="btn btn-success">Submit</button>
           </div>
         </form>
       </div>
 </div>
 @endsection
-

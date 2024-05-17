@@ -69,7 +69,7 @@
             <h1 class="card-title" style="font-size: 30px">Data Testimonial</h1>
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-sm">
                 <thead>
                     <tr class="text-center">
                         <th style="width: 10px">No</th>
@@ -83,7 +83,7 @@
                     <tr class="text-center">
                         <td>{{ $loop->iteration + ($testimonial->currentPage() - 1) * $testimonial->perPage() }}</td>
                         <td>{{ $value->nama }}</td>
-                        <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
+                        <td>{{ date('d F Y', strtotime($value->created_at)) }}</td>
                         <td>
                             <form action="/admin/testimonial/{{ $value->id }}" method="POST">
                                 @csrf

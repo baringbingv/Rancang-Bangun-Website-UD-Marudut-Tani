@@ -10,7 +10,7 @@ class TestimonialController extends Controller
 {
     public function index()
     {
-        $testimonial = Testimonial::paginate(5);
+        $testimonial = Testimonial::paginate(10);
         return view('kasir.testimonial.indexTestimonial', compact('testimonial'));
     }
 

@@ -12,7 +12,7 @@ class PembelianController extends Controller
 {
     public function index()
     {
-        $pembelian = Pembelian::orderBy('created_at', 'desc')->paginate(5);
+        $pembelian = Pembelian::orderBy('created_at', 'desc')->paginate(20);
         $produk = Produk::all();
 
         return view('admin.pembelian.indexPembelian', compact('pembelian', 'produk'));

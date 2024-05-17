@@ -103,7 +103,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
             @if (Auth::guard('admin')->user()->foto)
-                <img src="{{ asset('admin/foto/' . Auth::guard('admin')->user()->foto) }}" class="img-circle elevation-2"x alt="User Image">
+                <img src="{{ asset('admin/foto/' . Auth::guard('admin')->user()->foto) }}" class="img-circle elevation-2" x alt="User Image" style="aspect-ratio: 1/1;">
             @else
                 <img src="{{ asset('admin/dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
             @endif
@@ -145,6 +145,29 @@
             Produk
           </p>
         </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fa fa-users"></i>
+          <p>
+            Kasir
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="/admin/kasir" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Data Kasir</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/kasir/create" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Tambah Kasir</p>
+            </a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link">
@@ -214,14 +237,6 @@
             </a>
           </li>
         </ul>
-      </li>
-      <li class="nav-item">
-        <a href="/admin/kasir" class="nav-link">
-          <i class="nav-icon fas fa-users"></i>
-          <p>
-            Kasir
-          </p>
-        </a>
       </li>
       <li class="nav-item">
         <a href="/admin/testimonial" class="nav-link">
@@ -319,6 +334,24 @@
 <script src="{{ asset('admin/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script>
+<script>
+    function formatRupiah(angka, prefix){
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+		}
+</script>
 @stack('script')
 @stack('styles')
 </body>

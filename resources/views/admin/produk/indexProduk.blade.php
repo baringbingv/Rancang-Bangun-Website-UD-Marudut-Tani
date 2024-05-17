@@ -69,7 +69,7 @@
             <h3 class="card-title" style="font-size: 30px">Data Produk</h3>
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-sm">
                 <thead>
                     <tr class="text-center">
                         <th style="width: 10px">No</th>
@@ -90,9 +90,11 @@
                             <form action="/admin/produk/{{ $value->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a href="/admin/produk/{{ $value->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                                <a href="/admin/produk/{{ $value->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
-                                <button class="btn btn-danger btn-sm deletea" name="{{ $value->nama }}" id="{{ $value->id }}"><i class="fas fa-trash"></i></button>
+                                <div class="btn-group">
+                                    <a href="/admin/produk/{{ $value->id }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                                    <a href="/admin/produk/{{ $value->id }}/edit" class="btn btn-warning btn-sm ml-3 mr-3"><i class="fas fa-edit"></i></a>
+                                    <button class="btn btn-danger btn-sm delete" name="{{ $value->nama }}" id="{{ $value->id }}"><i class="fas fa-trash"></i></button>
+                                </div>
                             </form>
                         </td>
                     </tr>

@@ -9,7 +9,7 @@
     </div>
     <div class="card card-primary ml-3 mt-2" style="width: 90%">
         <div class="card-header">
-          <h3 class="card-title">Data Kasir</h3>
+          <h3 class="card-title" style="font-size: 30px">Tambah Kasir</h3>
         </div>
         <form action="/admin/kasir" method="POST" enctype="multipart/form-data">
             @csrf

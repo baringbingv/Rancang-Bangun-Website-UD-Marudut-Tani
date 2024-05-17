@@ -39,7 +39,7 @@
     </div>
     <div class="card card-primary ml-5 mt-2" style="width: 90%">
         <div class="card-header">
-          <h3 class="card-title">Data Produk</h3>
+          <h3 class="card-title"  style="font-size: 30px">Tambah Pemesanan</h3>
         </div>
         <form action="/admin/pembelian" method="POST" enctype="multipart/form-data">
             @csrf

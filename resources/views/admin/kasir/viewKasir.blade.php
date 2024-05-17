@@ -47,7 +47,7 @@
             <div id="grid-system2" class="col-sm-3">
                 <div class="box box-solid ">
                     <div id="grid-system2-body" class="box-body">
-                        <img src="{{ URL::asset('kasir/'. $kasir->foto) }}" class="img-thumbnail" width="500">
+                        <img src="{{ URL::asset('kasir/foto/'. $kasir->foto) }}" class="img-thumbnail" width="500">
                     </div>
                 </div>
             </div>

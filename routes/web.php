@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Name;
 use App\Controllers\Home;
+use App\Controllers\Admin\PenjualanController;
 
 
 /*
@@ -35,12 +36,11 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
     Route::group(['middleware' => ['admins']], function () {
         Route::get('/dashboard', 'AdminController@index');
         Route::get('/logout', 'AdminController@logout');
-        Route::get('profile', 'AdminController@profile');
+        Route::get('/profile', 'AdminController@profile');
+        Route::get('/filter', 'App\Http\Controllers\Admin\PenjualanController@filter')->name('penjualan.filter');
         Route::match (['get', 'post'], 'update-admin-password', 'AdminController@UpdateAdminPassword');
         Route::match (['get', 'post'], 'update-admin-details', 'AdminController@UpdateAdminDetails');
-
     });
-    Route::match(['get','post'], 'register', 'AdminController@register');
 });
 
 Route::prefix('/kasir')->namespace('App\Http\Controllers\Kasir')->group(function(){

@@ -25,14 +25,14 @@
                                     <a href="#" style="background-color: white; color: white; position: absolute; top: 90%">Pestisida</a>
                                 </div>
                             </div>
-                            {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
                             <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
-                            </button> --}}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -111,15 +111,15 @@
                         </div>
                     </div>
                     <div class="tab-content">
-                        <div id="tab-1" class="tab-pane fade show p-0">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
                             <div class="row g-4">
                                 <div class="col-lg-12">
                                     <div class="row g-4 justify-content-center">
                                         @foreach ($AllProduk as $item)
-                                        <div class="col-md-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp content-center" style="aspect-ratio: 3/4">
+                                        <div class="col-md-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp" style="aspect-ratio: 1/1">
                                             <div class="rounded position-relative fruite-item">
                                                 <div class="fruite-img">
-                                                    <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt=""  style="aspect-ratio: 3/2">                                                </div>
+                                                    <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt=""  style="width: 15%; height: 50%">                                                </div>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori }}</div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                     <h4>{{ $item->nama }}</h4>
@@ -150,7 +150,7 @@
                                        <div class="col-md-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp">
                                            <div class="rounded position-relative fruite-item">
                                                <div class="fruite-img">
-                                                   <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt="" style="aspect-ratio: 3/2">
+                                                   <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt="" style="width: 15%; height: 50%">
                                                </div>
                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori }}</div>
                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">

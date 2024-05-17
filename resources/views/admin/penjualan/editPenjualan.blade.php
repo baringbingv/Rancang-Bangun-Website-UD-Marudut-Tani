@@ -7,7 +7,7 @@
     </div>
     <div class="card card-primary ml-3 mt-2" style="width: 90%">
         <div class="card-header">
-          <h1 class="card-title" style="font-size: 30px">Data Penjualan</h1>
+          <h1 class="card-title" style="font-size: 30px">Edit Penjualan</h1>
         </div>
         <form action="/admin/penjualan/{{ $penjualan->id }}" method="POST">
             @csrf

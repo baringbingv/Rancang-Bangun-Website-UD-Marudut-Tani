@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Kasir;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Penjualan;
@@ -11,10 +11,10 @@ class PenjualanController extends Controller
 {
     public function index()
     {
-        $penjualan = Penjualan::orderBy('created_at', 'desc')->paginate(5);
+        $penjualan = Penjualan::orderBy('created_at', 'desc')->paginate(20);
         $produk = Produk::all();
 
-        return view('kasir.penjualan.indexPenjualan', compact('penjualan', 'produk'));
+        return view('admin.penjualan.indexPenjualan', compact('penjualan', 'produk'));
     }
 
     /**
@@ -26,7 +26,7 @@ class PenjualanController extends Controller
     {
         $produk = Produk::all();
 
-        return view('kasir.penjualan.tambahPenjualan', compact('produk'));
+        return view('admin.penjualan.tambahPenjualan', compact('produk'));
     }
 
     /**
@@ -37,31 +37,26 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = [
-            'nama_pembeli' => 'required',
-            'produk_id.*' => 'required',
-            'jumlah.*' => 'required|numeric',
-        ];
+        $request->validate([
+            'nama_pembeli' => 'required|string|max:255',
+            'produk_id' => 'required|array',
+            'jumlah' => 'required|array',
+            'produk_id.*' => 'exists:produk,id',
+            'jumlah.*' => 'required|integer|min:1',
+        ]);
 
-        $message = [
-            'nama_pembeli.required' => 'Nama Pelanggan Harus Di isi',
-            'produk_id.*.required' => 'Produk Harus Di isi',
-            'jumlah.*.required' => 'Jumlah Harus Di isi',
-            'jumlah.*.numeric' => 'Jumlah Harus Bertipe Angka',
-        ];
-        $this->validate($request, $validate, $message);
-
-        $numPenjualan = count($request->produk_id);
-
-        for ($i = 0; $i < $numPenjualan; $i++) {
-            $newPenjualan = new Penjualan;
-            $newPenjualan->nama_pembeli = $request->nama_pembeli;
-            $newPenjualan->produk_id = $request->produk_id[$i];
-            $newPenjualan->jumlah = $request->jumlah[$i];
-            $newPenjualan->save();
+        foreach($request->get('produk_id') as $index => $produk_id){
+            if (isset($request->get('jumlah')[$index])) {
+                $newPenjualan = new Penjualan;
+                $newPenjualan->fill([
+                    'nama_pembeli' => $request->get('nama_pembeli'),
+                    'produk_id' => $produk_id,
+                    'jumlah' => $request->get('jumlah')[$index]
+                ]);
+                $newPenjualan->save();
+            }
         }
-
-        return redirect("kasir/penjualan")->with('status', 'Data Penjualan berhasil di tambah');
+        return redirect("admin/penjualan")->with ('status', 'penjualan berhasil di tambahkan');
     }
 
     /**
@@ -73,7 +68,7 @@ class PenjualanController extends Controller
     public function show($id)
     {
         $penjualan = Penjualan::find($id);
-        return view('kasir.penjualan.viewPenjualan', compact('penjualan'));
+        return view('admin.penjualan.viewPenjualan', compact('penjualan'));
     }
 
     /**
@@ -85,7 +80,7 @@ class PenjualanController extends Controller
     public function edit(string $id)
     {
         $penjualan = Penjualan::find($id);
-        return view('kasir.penjualan.editPenjualan', ['penjualan' => $penjualan]);
+        return view('admin.penjualan.editPenjualan', ['penjualan' => $penjualan]);
     }
 
     /**
@@ -103,10 +98,10 @@ class PenjualanController extends Controller
 
         Penjualan::where('id', $id)->update
         ([
-            'jumlah' => $request->jumlah,
+                'jumlah' => $request->jumlah,
         ]);
 
-        return redirect('/kasir/penjualan')->with('status', 'Data Penjualan berhasil di update');
+        return redirect('/admin/penjualan');
     }
 
     /**
@@ -119,6 +114,6 @@ class PenjualanController extends Controller
     {
         $penjualan = Penjualan::find($id);
         $penjualan->delete();
-        return redirect('/kasir/penjualan')->with('status', 'Data Penjualan berhasil di hapus');
+        return redirect('/admin/penjualan')->with('status', 'Data Penjualan berhasil di hapus');
     }
 }
