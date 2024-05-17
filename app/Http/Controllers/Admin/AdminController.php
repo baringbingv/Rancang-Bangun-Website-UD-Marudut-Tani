@@ -21,7 +21,11 @@ class AdminController extends Controller
         $JumlahProduk = Produk::count();
         $JumlahKategori = Kategori::count();
         $JumlahKasir = Kasir::count();
-        $PenjualanPerHari = Penjualan::sum('jumlah');
+        $PenjualanPerHari = DB::table('penjualan')
+        ->whereDate('penjualan.created_at', Carbon::today())
+        ->join('produk', 'penjualan.produk_id', '=', 'produk.id')
+        ->select(DB::raw('SUM(penjualan.jumlah * produk.harga) as Rp'))
+        ->value('Rp');
 
         $dataPenjualan = DB::table('penjualan')
         ->join('produk', 'penjualan.produk_id', '=', 'produk.id')

@@ -102,8 +102,8 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ $PenjualanPerHari }}</h3>
-                            <p>Penjualan</p>
+                            <h3>Rp. {{ number_format($PenjualanPerHari, 0, ',', '.') }}</h3>
+                            <p>Penjualan <?php echo date('d F Y'); ?></p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-money-bill-wave"></i>

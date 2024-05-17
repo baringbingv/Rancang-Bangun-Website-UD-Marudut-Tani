@@ -70,13 +70,14 @@
                 <div class="form-group">
                     <label class="control-label col-md-4" for="noTelp">No Telepon</label>
                     <div class="col-sm-8">
-                        <input type="text" id="noTelp" class="form-control" name="noTelp" value="{{ Auth::guard('admin')->user()->noTelp }}" placeholder="No Telepon" maxlength="12" minlength="11">
+                        <input type="text" id="noTelp" class="form-control" name="noTelp" value="{{ Auth::guard('admin')->user()->noTelp }}" placeholder="No Telepon" maxlength="13" minlength="11">
                         <p class="help-block help-block-error "></p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="foto">Foto</label>
-                    <input type="file" class="form-control" id="foto" name="foto" value="{{ old('foto') }}" style="width: 66%;"> <br>
+                    <label for="">Foto</label>
+                    <input type="file" class="form-control" id="foto" name="foto" value="{{ Auth::guard('admin')->user()->foto }}" style="width: 66%;"> <br>
+                    <h6>{{ (Auth::guard('admin')->user()->foto) }}</h6>
                     @if (!empty(Auth::guard('admin')->user()->foto))
                         <a class="btn btn-info bg-primary btn-sm" target="_blank"
                             href="{{ URL::asset('admin/foto/' . Auth::guard('admin')->user()->foto) }}">View

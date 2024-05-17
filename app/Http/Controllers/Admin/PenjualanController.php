@@ -50,21 +50,22 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+       $validatedData = $request->validate([
             'nama_pembeli' => 'required|string|max:255',
-            'produk_id' => 'required|array',
-            'jumlah' => 'required|array',
-            'produk_id.*' => 'exists:produk,id',
-            'jumlah.*' => 'required|integer|min:1',
+            'produk_id.*' => 'required|exists:produk,id',
+            'jumlah.*' => 'required|numeric|min:1',
         ]);
 
-        foreach($request->get('produk_id') as $index => $produk_id){
-            if (isset($request->get('jumlah')[$index])) {
+        $produk_id = array_reverse($request->get('produk_id'));
+        $jumlah = array_reverse($request->get('jumlah'));
+
+        foreach($produk_id as $index => $produk_id){
+            if (isset($jumlah[$index])) {
                 $newPenjualan = new Penjualan;
                 $newPenjualan->fill([
                     'nama_pembeli' => $request->get('nama_pembeli'),
                     'produk_id' => $produk_id,
-                    'jumlah' => $request->get('jumlah')[$index]
+                    'jumlah' => $jumlah[$index]
                 ]);
                 $newPenjualan->save();
             }
