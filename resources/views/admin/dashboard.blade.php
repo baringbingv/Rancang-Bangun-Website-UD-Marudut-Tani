@@ -6,7 +6,6 @@
 <script>
     var ctx = document.getElementById('sales-chart-canvas').getContext('2d');
 
-    // Data dari controller
     var labels = {!! json_encode($labels) !!};
     var data = {!! json_encode($totalPenjualanPerBulan) !!};
 
@@ -92,7 +91,7 @@
                             <p>Produk</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="nav-icon fas fa-boxes"></i>
                         </div>
                         <a href="/admin/produk" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -120,7 +119,7 @@
                             <p>Kasir</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="nav-icon fas fa-users"></i>
                         </div>
                         <a href="/admin/kasir" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -134,7 +133,7 @@
                             <p>Kategori</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="nav-icon fa fa-bars"></i>
                         </div>
                         <a href="/admin/kategori" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -180,16 +179,3 @@
     <!-- /.content -->
 </div>
 @endsection
-
-@push('styles')
-    <style>
-        @media (max-width: 320px) {
-            #sales-chart-canvas {
-                width: 100% !important;
-                max-width: 100% !important;
-                height: 200% !important;
-                max-height: 200% !important;
-            }
-        }
-    </style>
-@endpush

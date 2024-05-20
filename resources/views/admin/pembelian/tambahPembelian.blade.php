@@ -19,9 +19,13 @@
                 html += '@endforeach';
                 html += '</select>';
                 html += '</div>';
-                html += '<label for="jumlah" class="col-sm-3 col-form-label text-right">Jumlah</label>';
+                html += '<label for="jumlah" class="col-sm-2 col-form-label text-right">Jumlah</label>';
                 html += '<div class="col-sm-1">'
                 html += '<input type="int" class="form-control" name="jumlah[]">';
+                html += '</div>';
+                html += '<label for="harga" class="col-sm-2 col-form-label text-right">Harga</label>';
+                html += '<div class="col-sm-1">'
+                html += '<input type="int" class="form-control" name="harga[]">';
                 html += '</div>';
                 html += '</div>';
             }
@@ -47,16 +51,9 @@
             <div class="form-group">
               <label for="jumlahProduk">Jumlah Produk</label>
               <select class="form-control" id="jumlahProduk" name="jumlahProduk">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+                @for ($i = 1; $i <= 30; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
               </select>
             </div>
             <div id="pembelian">
@@ -70,9 +67,13 @@
                             @endforeach
                         </select>
                     </div>
-                    <label for="jumlah" class="col-sm-3 col-form-label text-right">Jumlah</label>
+                    <label for="jumlah" class="col-sm-2 col-form-label text-right">Jumlah</label>
                     <div class="col-sm-1">
                         <input type="int" class="form-control" name="jumlah[]">
+                    </div>
+                    <label for="Harga" class="col-sm-2 col-form-label text-right">Harga</label>
+                    <div class="col-sm-1">
+                        <input type="int" class="form-control" name="harga[]">
                     </div>
                 </div>
             </div>

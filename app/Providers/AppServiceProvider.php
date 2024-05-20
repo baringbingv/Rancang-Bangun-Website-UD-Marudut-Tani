@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Pembelian;
+use App\Models\Penjualan;
+use App\Observers\PembelianObserver;
+use App\Observers\PenjualanObserver;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Pembelian::observe(PembelianObserver::class);
+        Penjualan::observe(PenjualanObserver::class);
     }
 }

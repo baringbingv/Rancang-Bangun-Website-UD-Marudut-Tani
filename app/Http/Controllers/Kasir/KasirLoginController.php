@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Kasir;
 use App\Models\Produk;
 use App\Models\Kategori;
+use App\Models\Penjualan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\DB;
 
 class KasirLoginController extends Controller
 {
@@ -16,8 +20,12 @@ class KasirLoginController extends Controller
         $JumlahProduk = Produk::count();
         $JumlahKategori = Kategori::count();
 
-        return view ('kasir.dashboard', compact('JumlahProduk', 'JumlahKategori'));
-    }
+        $PenjualanPerHari = DB::table('penjualan')
+            ->whereDate('created_at', Carbon::today())
+            ->sum('jumlah');
+
+            return view ('kasir.dashboard', compact('JumlahProduk', 'JumlahKategori', 'PenjualanPerHari'));
+        }
 
     public function Login(Request $request)
     {

@@ -10,27 +10,25 @@
                 originalIndexes.push(index);
             });
 
-            $('#search-date').change(function() {
-                var selectedDate = $(this).val();
+            $('#start-date, #end-date').change(function() {
+                var startDate = $('#start-date').val();
+                var endDate = $('#end-date').val();
                 var currentIndex = 0;
                 $('#penjualan_table tbody tr').each(function(index) {
-                    if (selectedDate === '') {
+                    var rowDate = $(this).find('td:eq(1)').text();
+                    if (startDate === '' || endDate === '') {
                         $(this).show();
                         $(this).find('td:eq(0)').text(originalIndexes[index] + 1);
+                    } else if (startDate <= rowDate && rowDate <= endDate) {
+                        $(this).show();
+                        $(this).find('td:eq(0)').text(currentIndex + 1);
+                        currentIndex++;
                     } else {
-                        var rowDate = $(this).find('td:eq(1)').text();
-                        if (rowDate.trim() === selectedDate) {
-                            $(this).show();
-                            $(this).find('td:eq(0)').text(currentIndex + 1);
-                            currentIndex++;
-                        } else {
-                            $(this).hide();
-                        }
+                        $(this).hide();
                     }
                 });
-            })
+            });
         });
-
 
            $(document).on('click', '.delete', function(e) {
             e.preventDefault();
@@ -83,12 +81,18 @@
             <h1 class="card-title" style="font-size: 30px">Data Penjualan</h1>
         </div>
         <div class="container mt-3 mb-3 ml-5">
-            <div class="row ml-5">
+            <div class="row ml-12">
                 <div class="col-lg-1 mt-2">
-                    <span class="fas fa-filter text-secondary" style="font-size: 20px">Filter:</span>
+                    <span class="fas fa-filter text-secondary mb-" style="font-size: 20px">Filter:</span>
                 </div>
-                <div class="col-lg-2">
-                    <input type="date" id="search-date" class="form-control" placeholder="Cari berdasarkan tanggal penjualan...">
+                <div class="col-lg-12 row">
+                    <div class="col-lg-4">
+                        <input type="date" id="start-date" class="form-control">
+                    </div>
+                    -
+                    <div class="col-lg-4">
+                        <input type="date" id="end-date" class="form-control">
+                    </div>
                 </div>
             </div>
         </div>

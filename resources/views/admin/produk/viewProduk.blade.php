@@ -27,7 +27,7 @@
                     </tr>
                     </tr>
                         <th>Kategori</th>
-                        <td>{{ $produk->kategori }}</td>
+                        <td>{{ $produk->kategori->kategori }}</td>
                     </tr>
                     <tr>
                         <th>Deskripsi</th>

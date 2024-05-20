@@ -104,7 +104,7 @@
                         <select name="produk_id[]" id="produk_id" class="custom-select form-control-border">
                             <option value="">--Pilih Produk--</option>
                             @foreach ($produk as $item)
-                                <option value="{{ $item->id }}" data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" data-kategori="{{ $item->kategori }}" data-harga="{{ $item->harga }}">{{ $item->nama }}</option>
+                                <option value="{{ $item->id }}" data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" data-kategori="{{ $item->kategori->kategori }}" data-harga="{{ $item->harga }}">{{ $item->nama }}</option>
                             @endforeach
                         </select>
                     </div>

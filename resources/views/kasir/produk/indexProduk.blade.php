@@ -69,7 +69,7 @@
             <h3 class="card-title" style="font-size: 30px">Data Produk</h3>
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-sm">
                 <thead>
                     <tr class="text-center">
                         <th style="width: 10px">No</th>
@@ -85,7 +85,7 @@
                         <td>{{ $loop->iteration + ($produk->currentPage() - 1) * $produk->perPage() }}</td>
                         <td>{{ $value->nama }}</td>
                         <td>{{ $value->stok }}</td>
-                        <td>{{ $value->kategori }}</td>
+                        <td>{{ $value->kategori->kategori }}</td>
                         <td>
                             <form action="/kasir/produk/{{ $value->id }}" method="POST">
                                 @csrf

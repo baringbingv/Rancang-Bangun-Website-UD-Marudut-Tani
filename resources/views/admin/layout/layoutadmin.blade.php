@@ -140,7 +140,7 @@
       </li>
       <li class="nav-item">
         <a href="/admin/produk" class="nav-link">
-          <i class="nav-icon fas fa-th"></i>
+          <i class="nav-icon fas fa-boxes"></i>
           <p>
             Produk
           </p>

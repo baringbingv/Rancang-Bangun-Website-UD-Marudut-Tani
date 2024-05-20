@@ -30,8 +30,7 @@
             });
         });
 
-
-           $(document).on('click', '.delete', function(e) {
+        $(document).on('click', '.delete', function(e) {
             e.preventDefault();
             var id = $(this).attr('id');
             var name = $(this).data('name');
@@ -104,6 +103,7 @@
                         <th style="width: 10px">No</th>
                         <th>Tanggal Penjualan</th>
                         <th>Nama Pelanggan</th>
+                        <th>Nama Produk</th>
                         <th>Total Harga</th>
                         <th>Aksi</th>
                     </tr>
@@ -115,6 +115,7 @@
                             @csrf
                             <td>{{ date('Y-m-d', strtotime($item->created_at)) }}</td>
                             <td>{{ $item->nama_pembeli }}</td>
+                            <td>{{ $item->produk->nama }}</td>
                             <td>
                                 Rp. {{ number_format(
                                     $item->jumlah * $item->produk->harga,

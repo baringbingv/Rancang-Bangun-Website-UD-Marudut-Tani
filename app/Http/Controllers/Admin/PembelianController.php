@@ -41,12 +41,15 @@ class PembelianController extends Controller
         $validate = [
             'produk_id.*' => 'required',
             'jumlah.*' => 'required|numeric',
+            'harga.*' => 'required|numeric',
         ];
 
         $message = [
             'produk_id.*.required' => 'Produk Harus Di isi',
             'jumlah.*.required' => 'Jumlah Harus Di isi',
             'jumlah.*.numeric' => 'Jumlah Harus Bertipe Angka',
+            'harga.*.required' => 'Harga Harus Di isi',
+            'harga.*.numeric' => 'Harga Harus Bertipe Angka',
         ];
         $this->validate($request, $validate, $message);
 
@@ -56,6 +59,7 @@ class PembelianController extends Controller
             $newPembelian = new Pembelian;
             $newPembelian->produk_id = $request->produk_id[$i];
             $newPembelian->jumlah = $request->jumlah[$i];
+            $newPembelian->harga_beli = $request->harga[$i];
             $newPembelian->save();
         }
 

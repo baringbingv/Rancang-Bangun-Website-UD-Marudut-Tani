@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_pembeli');
             $table->unsignedBigInteger('produk_id');
-            $table->foreign('produk_id')->references('id')->on('produk');
+            $table->foreign('produk_id')->references('id')->on('produk')->onDelete('cascade');
             $table->integer('jumlah');
             $table->timestamps();
         });

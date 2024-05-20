@@ -85,7 +85,7 @@
                         <td>{{ $loop->iteration + ($produk->currentPage() - 1) * $produk->perPage() }}</td>
                         <td>{{ $value->nama }}</td>
                         <td>{{ $value->stok }}</td>
-                        <td>{{ $value->kategori }}</td>
+                        <td>{{ $value->kategori->kategori }}</td>
                         <td>
                             <form action="/admin/produk/{{ $value->id }}" method="POST">
                                 @csrf

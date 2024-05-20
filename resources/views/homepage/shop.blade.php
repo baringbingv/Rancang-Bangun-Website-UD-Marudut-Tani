@@ -62,14 +62,14 @@
                                                 $jumlahData = $AllProduk->count();
                                             @endphp
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="tab-1-link" data-bs-toggle="pill" href="#tab-1"><i class="fas fa-leaf me-2"></i>All Products <span class="text-secondary">({{ $jumlahData }})</span></a>
+                                                <a class="nav-link active" id="tab-1-link" data-bs-toggle="pill" href="#tab"><i class="fas fa-leaf me-2"></i>All Products <span class="text-secondary">({{ $jumlahData }})</span></a>
                                             </li>
                                             @foreach ($AllKategori as $item)
                                             @php
-                                                $jumlahData = $AllProduk->where('kategori', $item->kategori)->count();
+                                                $jumlahData = $AllProduk->where('kategori_id', $item->id)->count();
                                             @endphp
                                             <li class="nav-item">
-                                                <a class="nav-link" id="tab-{{ $item->kategori }}-link" data-bs-toggle="pill" href="#tab-{{ $item->kategori }}"><i class="fas fa-leaf me-2"></i>{{ $item->kategori }} <span class="text-secondary">({{ $jumlahData }})</span></a></a>
+                                                <a class="nav-link" id="tab-{{ $item->kategori }}-link" data-bs-toggle="pill" href="#tab-{{ $item->id }}"><i class="fas fa-leaf me-2"></i>{{ $item->kategori }} <span class="text-secondary">({{ $jumlahData }})</span></a></a>
                                             </li>
                                             @endforeach
                                         </ul>
@@ -82,7 +82,7 @@
                                 <div class="container py-1">
                                     <div class="tab-class text-center">
                                         <div class="tab-content">
-                                            <div id="tab-1" class="tab-pane fade show p-0 active">
+                                            <div id="tab" class="tab-pane fade show p-0 active">
                                                 <div class="row g-12">
                                                     <div class="col-lg-12">
                                                         <div class="row g-12">
@@ -92,7 +92,7 @@
                                                                     <div class="fruite-img">
                                                                         <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt="" style="aspect-ratio: 3/2">
                                                                     </div>
-                                                                    <h6 class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori }}</h6>
+                                                                    <h6 class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori->kategori }}</h6>
                                                                     <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                                         <h4>{{ $item->nama }}</h4>
                                                                         <p>{{ $item->deskripsi }}</p>
@@ -108,7 +108,7 @@
                                                 </div>
                                             </div>
                                             @php
-                                                $kategoriDariDatabase = \App\Models\Kategori::pluck('kategori')->toArray();
+                                                $kategoriDariDatabase = \App\Models\Kategori::pluck('id')->toArray();
                                                 $kategoriKonten = [];
                                                 foreach ($kategoriDariDatabase as $kategori) {
                                                     $kategoriKonten[$kategori] = "$kategori";
@@ -120,13 +120,13 @@
                                                 <div class="row g-12">
                                                     <div class="col-lg-12">
                                                         <div class="row g-12">
-                                                            @foreach($AllProduk->where('kategori', $kategori) as $item)
+                                                            @foreach($AllProduk->where('kategori_id', $kategori) as $item)
                                                                 <div class="col-md-6 col-lg-6 col-xl-4 mb-5 col-lg-6 fruite-item" id="{{ $item->kategori }}">
                                                                     <div class="rounded position-relative animate__animated animate__zoomInUp">
                                                                         <div class="fruite-img">
                                                                             <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt="" style="aspect-ratio: 3/2">
                                                                         </div>
-                                                                        <h6 class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori }}</h6>
+                                                                        <h6 class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori->kategori }}</h6>
                                                                         <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                                             <h4>{{ $item->nama }}</h4>
                                                                             <p>{{ $item->deskripsi }}</p>

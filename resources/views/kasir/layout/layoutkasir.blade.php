@@ -102,7 +102,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
             @if (Auth::guard('kasir')->user()->foto)
-                <img src="{{ asset('kasir/foto/' . Auth::guard('kasir')->user()->foto) }}" class="elevation-2"x alt="User Image" style="border-radius: 50%">
+                <img src="{{ asset('kasir/foto/' . Auth::guard('kasir')->user()->foto) }}" class="img-circle elevation-2"x alt="User Image" style="aspect-ratio: 1/1;">
             @else
                 <img src="{{ asset('admin/dist/img/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
             @endif
@@ -139,7 +139,7 @@
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link">
-          <i class="nav-icon fa fa-th"></i>
+          <i class="nav-icon fas fa-boxes"></i>
           <p>
             Produk
             <i class="right fas fa-angle-left"></i>
@@ -303,6 +303,24 @@
 <script src="{{ asset('admin/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script>
+<script>
+    function formatRupiah(angka, prefix){
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+		}
+</script>
 @stack('script')
 
 </body>

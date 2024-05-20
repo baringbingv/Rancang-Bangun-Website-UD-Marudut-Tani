@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Kasir;
 
 use Illuminate\Http\Request;
 use App\Models\Penjualan;
@@ -14,7 +14,7 @@ class PenjualanController extends Controller
         $penjualan = Penjualan::orderBy('created_at', 'desc')->paginate(20);
         $produk = Produk::all();
 
-        return view('admin.penjualan.indexPenjualan', compact('penjualan', 'produk'));
+        return view('kasir.penjualan.indexPenjualan', compact('penjualan', 'produk'));
     }
 
     /**
@@ -26,7 +26,7 @@ class PenjualanController extends Controller
     {
         $produk = Produk::all();
 
-        return view('admin.penjualan.tambahPenjualan', compact('produk'));
+        return view('kasir.penjualan.tambahPenjualan', compact('produk'));
     }
 
     /**
@@ -37,26 +37,27 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+       $validatedData = $request->validate([
             'nama_pembeli' => 'required|string|max:255',
-            'produk_id' => 'required|array',
-            'jumlah' => 'required|array',
-            'produk_id.*' => 'exists:produk,id',
-            'jumlah.*' => 'required|integer|min:1',
+            'produk_id.*' => 'required|exists:produk,id',
+            'jumlah.*' => 'required|numeric|min:1',
         ]);
 
-        foreach($request->get('produk_id') as $index => $produk_id){
-            if (isset($request->get('jumlah')[$index])) {
+        $produk_id = array_reverse($request->get('produk_id'));
+        $jumlah = array_reverse($request->get('jumlah'));
+
+        foreach($produk_id as $index => $produk_id){
+            if (isset($jumlah[$index])) {
                 $newPenjualan = new Penjualan;
                 $newPenjualan->fill([
                     'nama_pembeli' => $request->get('nama_pembeli'),
                     'produk_id' => $produk_id,
-                    'jumlah' => $request->get('jumlah')[$index]
+                    'jumlah' => $jumlah[$index]
                 ]);
                 $newPenjualan->save();
             }
         }
-        return redirect("admin/penjualan")->with ('status', 'penjualan berhasil di tambahkan');
+        return redirect("kasir/penjualan")->with ('status', 'penjualan berhasil di tambahkan');
     }
 
     /**
@@ -68,7 +69,7 @@ class PenjualanController extends Controller
     public function show($id)
     {
         $penjualan = Penjualan::find($id);
-        return view('admin.penjualan.viewPenjualan', compact('penjualan'));
+        return view('kasir.penjualan.viewPenjualan', compact('penjualan'));
     }
 
     /**
@@ -80,7 +81,7 @@ class PenjualanController extends Controller
     public function edit(string $id)
     {
         $penjualan = Penjualan::find($id);
-        return view('admin.penjualan.editPenjualan', ['penjualan' => $penjualan]);
+        return view('kasir.penjualan.editPenjualan', ['penjualan' => $penjualan]);
     }
 
     /**
@@ -101,7 +102,7 @@ class PenjualanController extends Controller
                 'jumlah' => $request->jumlah,
         ]);
 
-        return redirect('/admin/penjualan');
+        return redirect('/kasir/penjualan');
     }
 
     /**
@@ -114,6 +115,6 @@ class PenjualanController extends Controller
     {
         $penjualan = Penjualan::find($id);
         $penjualan->delete();
-        return redirect('/admin/penjualan')->with('status', 'Data Penjualan berhasil di hapus');
+        return redirect('/kasir/penjualan')->with('status', 'Data Penjualan berhasil di hapus');
     }
 }

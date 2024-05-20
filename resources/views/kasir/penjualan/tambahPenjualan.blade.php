@@ -1,4 +1,4 @@
-@extends('admin.layout.layoutadmin')
+@extends('kasir.layout.layoutkasir')
 
 @section('title', 'Tambah Penjualan')
 
@@ -87,7 +87,7 @@
         <div class="card-header">
           <h1 class="card-title" style="font-size: 30px">Tambah Penjualan</h1>
         </div>
-        <form action="/admin/penjualan" method="POST" enctype="multipart/form-data">
+        <form action="/kasir/penjualan" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="card-body">
             <div class="form-group">
@@ -104,7 +104,7 @@
                         <select name="produk_id[]" id="produk_id" class="custom-select form-control-border">
                             <option value="">--Pilih Produk--</option>
                             @foreach ($produk as $item)
-                                <option value="{{ $item->id }}" data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" data-kategori="{{ $item->kategori }}" data-harga="{{ $item->harga }}">{{ $item->nama }}</option>
+                                <option value="{{ $item->id }}" data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" data-kategori="{{ $item->kategori->kategori }}" data-harga="{{ $item->harga }}">{{ $item->nama }}</option>
                             @endforeach
                         </select>
                     </div>

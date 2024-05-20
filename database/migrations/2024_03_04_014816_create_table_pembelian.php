@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('pembelian', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('produk_id');
-            $table->foreign('produk_id')->references('id')->on('produk');
+            $table->foreign('produk_id')->references('id')->on('produk')->onDelete('cascade');
             $table->integer('jumlah');
+            $table->integer('harga_beli');
             $table->timestamps();
         });
     }

@@ -27,12 +27,12 @@
                         <td>{{ $pembelian->jumlah }}</td>
                     </tr>
                     <tr>
-                        <th>Harga</th>
-                        <td>Rp. {{ number_format($pembelian->produk->harga), 0}}</td>
+                        <th>Harga Beli</th>
+                        <td>Rp. {{ number_format($pembelian->harga_beli), 0}}</td>
                     </tr>
                     <tr>
                         <th>Total Harga</th>
-                        <td>Rp. {{ number_format($pembelian->jumlah * $pembelian->produk->harga),0 }}</td>
+                        <td>Rp. {{ number_format($pembelian->jumlah * $pembelian->harga_beli),0 }}</td>
                     </tr>
                 </tbody>
             </table>
