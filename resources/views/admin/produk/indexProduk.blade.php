@@ -57,7 +57,6 @@
     </script>
 @endpush
 
-
 @section('content')
 <div class="container-100 content-wrapper">
     <section class="content">

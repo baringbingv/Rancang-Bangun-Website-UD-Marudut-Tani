@@ -13,16 +13,16 @@
                         <div id="carouselId" class="carousel slide position-relative animate__animated animate__FadeIn" data-bs-ride="carousel">
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active rounded">
-                                    <img src="{{ URL::asset('asset/img/pupuk.png') }}" class="img-fluid w-100 h-100 rounded" alt="First slide">
-                                    <a href="#" style="background-color: white; color: white; position: absolute; top: 90%">Pupuk</a>
+                                    <img src="{{ URL::asset('asset/img/pupuk.png') }}" class="img-fluid w-100 h-100 rounded" style="aspect-ratio: 5/3" alt="First slide">
                                 </div>
                                 <div class="carousel-item rounded">
-                                    <img src="{{ URL::asset('asset/img/pakan.png') }}" class="img-fluid w-100 h-100 rounded" alt="Second slide">
-                                    <a href="#" style="background-color: white; color: white; position: absolute; top: 90%">Pakan</a>
+                                    <img src="{{ URL::asset('asset/img/pakan.png') }}" class="img-fluid w-100 h-100 rounded" style="aspect-ratio: 5/3" alt="Second slide">
                                 </div>
                                 <div class="carousel-item rounded">
-                                    <img src="{{ URL::asset('asset/img/pestisida.png') }}" class="img-fluid w-100 h-100 rounded" alt="Second slide">
-                                    <a href="#" style="background-color: white; color: white; position: absolute; top: 90%">Pestisida</a>
+                                    <img src="{{ URL::asset('asset/img/pestisida2.png') }}" class="img-fluid w-100 h-100 rounded" style="aspect-ratio: 5/3" alt="Third slide">
+                                </div>
+                                <div class="carousel-item rounded">
+                                    <img src="{{ URL::asset('asset/img/pestisida2.jpg') }}" class="img-fluid w-100 h-100 rounded" style="aspect-ratio: 5/3" alt="Fourth slide">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
@@ -119,14 +119,19 @@
                                         <div class="col-md-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp" style="aspect-ratio: 1/1">
                                             <div class="rounded position-relative fruite-item">
                                                 <div class="fruite-img">
-                                                    <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt=""  style="width: 15%; height: 50%">                                                </div>
+                                                    <img src="{{ URL::asset('produk/'. $item->gambar) }}" class="img-fluid w-100 rounded-top" alt=""  style="width: 15%; height: 50%">
+                                                </div>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $item->kategori->kategori }}</div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                     <h4>{{ $item->nama }}</h4>
                                                     <p>{{ $item->deskripsi }}</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-5 fw-bold mb-0">Rp. {{ number_format($item->harga, 0) }}</p>
-                                                        <p class="px-3"> Stok: {{ $item->stok }}</p>
+                                                        @if( $item->stok  <= 0)
+                                                            <p class="px-3 text-secondary"> Stok: Habis</p>
+                                                        @else
+                                                            <p class="px-3"> Stok: {{ $item->stok }}</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -159,6 +164,11 @@
                                                    <p>{{ $item->deskripsi }}</p>
                                                    <div class="d-flex justify-content-between flex-lg-wrap">
                                                        <p class="text-dark fs-5 fw-bold mb-0">Rp. {{ number_format($item->harga, 0) }} </p>
+                                                        @if( $item->stok  <= 0)
+                                                            <p class="px-3 text-secondary"> Stok: Habis</p>
+                                                        @else
+                                                            <p class="px-3"> Stok: {{ $item->stok }}</p>
+                                                        @endif
                                                    </div>
                                                </div>
                                            </div>

@@ -37,10 +37,10 @@
             @enderror
             <div class="form-group">
                 <label for="kategori">Kategori :</label>
-                <select name="kategori" id="kategori" class="custom-select form-control-border" value="{{ old('kategori') }}">
+                <select name="kategori" id="kategori" class="custom-select form-control-border">
                     <option value="">--Pilih Kategori--</option>
                     @foreach ($kategori as $item)
-                        <option value="{{ $item->kategori }}">{{ $item->kategori }}</option>
+                        <option value="{{ $item->id }}">{{ $item->kategori }}</option>
                     @endforeach
                 </select>
             @error('kategori')

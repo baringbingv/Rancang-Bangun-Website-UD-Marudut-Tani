@@ -98,6 +98,11 @@
                                                                         <p>{{ $item->deskripsi }}</p>
                                                                         <div class="d-flex justify-content-between flex-lg-wrap">
                                                                             <p class="text-dark fs-5 fw-bold mb-0">Rp. {{ number_format($item->harga, 0) }}</p>
+                                                                            @if( $item->stok  <= 0)
+                                                                                <p class="px-2 text-secondary"> Stok: Habis</p>
+                                                                            @else
+                                                                                <p class="px-3"> Stok: {{ $item->stok }}</p>
+                                                                            @endif
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -132,6 +137,11 @@
                                                                             <p>{{ $item->deskripsi }}</p>
                                                                             <div class="d-flex justify-content-between flex-lg-wrap">
                                                                                 <p class="text-dark fs-5 fw-bold mb-0">Rp. {{ number_format($item->harga, 0) }}</p>
+                                                                                @if( $item->stok  <= 0)
+                                                                                    <p class="px-2 text-secondary"> Stok: Habis</p>
+                                                                                @else
+                                                                                    <p class="px-3"> Stok: {{ $item->stok }}</p>
+                                                                                @endif
                                                                             </div>
                                                                         </div>
                                                                     </div>

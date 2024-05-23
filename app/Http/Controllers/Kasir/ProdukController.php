@@ -59,7 +59,7 @@ class ProdukController extends Controller
         $newProduk->nama = $request->nama;
         $newProduk->stok = $request->stok;
         $newProduk->harga = $request->harga;
-        $newProduk->kategori = $request->kategori;
+        $newProduk->kategori_id = $request->kategori;
         $newProduk->gambar = $namaFile;
         $newProduk->deskripsi = $request->deskripsi;
 
