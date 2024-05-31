@@ -164,7 +164,7 @@
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <div class="tab-pane active" id="sales-chart">
-                                    <canvas id="sales-chart-canvas" height="100" data-chart-type="line" data-chart-dataset-source="salesData"></canvas>
+                                    <canvas id="sales-chart-canvas" height="100" data-chart-type="bar" data-chart-dataset-source="salesData"></canvas>
                                 </div>
                             </div>
                         </div><!-- /.card-body -->

@@ -97,8 +97,8 @@ class KategoriController extends Controller
         ];
 
         $message = [
-            'nama.required' => 'Kolom Nama Harus Di isi',
-            'nama.regex' => 'Isi Kolom Nama Harus Berupa Huruf/String',
+            'kategori.required' => 'Kolom Nama Harus Di isi',
+            'kategori.regex' => 'Isi Kolom Nama Harus Berupa Huruf/String',
             'deskripsi.required' => 'Kolom Deskripsi Harus Di isi',
         ];
         $this->validate($request, $validate, $message);
@@ -108,7 +108,7 @@ class KategoriController extends Controller
         $kategori->deskripsi = $request['deskripsi'];
 
         $kategori->update();
-        return redirect('/admin/kategori')->with('success_message', 'Kategori ' . $kategori->nama . ' Berhasil diupdate');
+        return redirect('/admin/kategori')->with('success_message', 'Kategori ' . $kategori->kategori . ' Berhasil diupdate');
     }
 
     /**
@@ -121,6 +121,6 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::find($id);
         $kategori->delete();
-        return redirect('/admin/kategori')->with('success_message', 'Kategori ' . $kategori->nama . ' berhasil dihapus');
+        return redirect('/admin/kategori')->with('success_message', 'Kategori ' . $kategori->kategori . ' berhasil dihapus');
     }
 }

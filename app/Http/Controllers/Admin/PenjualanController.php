@@ -70,7 +70,7 @@ class PenjualanController extends Controller
                 $newPenjualan->save();
             }
         }
-        return redirect("admin/penjualan")->with ('status', 'penjualan berhasil di tambahkan');
+        return redirect("admin/penjualan")->with('status', 'Data Penjualan berhasil di tambahkan');
     }
 
     /**
@@ -115,7 +115,7 @@ class PenjualanController extends Controller
                 'jumlah' => $request->jumlah,
         ]);
 
-        return redirect('/admin/penjualan');
+        return redirect('/admin/penjualan')->with('status', 'Data Penjualan berhasil diubah');
     }
 
     /**
@@ -128,6 +128,6 @@ class PenjualanController extends Controller
     {
         $penjualan = Penjualan::find($id);
         $penjualan->delete();
-        return redirect('/admin/penjualan')->with('status', 'Data Penjualan berhasil di hapus');
+        return redirect('/admin/penjualan')->with('status', 'Data Penjualan berhasil dihapus');
     }
 }

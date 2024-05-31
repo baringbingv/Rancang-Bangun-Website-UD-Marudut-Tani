@@ -52,9 +52,6 @@
           <!-- /.col -->
         </div>
       </form>
-      <p class="mb-1 mt-5">
-        Tidak Memiliki Akun <a href="{{ url('/admin/register') }}">Register</a>
-      </p>
     </div>
     <!-- /.card-body -->
   </div>
